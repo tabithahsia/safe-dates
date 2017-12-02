@@ -32,9 +32,9 @@ class App extends React.Component {
                 />
               )}/>
 
-            <Route exact path="/formcreation" render{(props) => (
+            <Route exact path="/formcreation" render={(props) => (
                 <UserCreation/>
-              )}
+              )}/>
             </Switch>
         </div>
       </BrowserRouter>
