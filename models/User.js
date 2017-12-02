@@ -24,7 +24,18 @@ var UserSchema = new Schema({
   },
   dateTime: {
     type: String
+  },
+  height: {
+    type: String
+  }, 
+  gender: {
+    type: String
+  },
+  userComplete: {
+    type: Boolean,
+    default: false
   }
+
 
 });
 
