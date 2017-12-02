@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header.jsx';
-import LoginOrStart from './LoginOrStart.jsx'
+import LoginOrStart from './LoginOrStart.jsx';
+import UserCreation from './UserCreation.jsx';
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 
 class App extends React.Component {
@@ -9,11 +10,9 @@ class App extends React.Component {
 
     this.state = {
       userLogged: false,
-      serverResponded: false
+      serverResponded: false,
     }
   }
-
-  
 
   componentDidUpdate(){
     console.log(this.state)
@@ -25,18 +24,22 @@ class App extends React.Component {
         <div className='container-fluid' id='big-container'>
           <Header />
             <Switch>
-              
+              //Routes
               <Route exact path="/" render={(props) => (
                 <LoginOrStart
                 userLogged={this.state.userLogged}
                 serverResponded={this.state.serverResponded}
                 />
               )}/>
-              </Switch>  
+
+            <Route exact path="/formcreation" render={(props) => (
+                <UserCreation/>
+              )}/>
+            </Switch>
         </div>
-      </BrowserRouter>    
+      </BrowserRouter>
     )
   }
 }
 
-export default App; 
+export default App;
