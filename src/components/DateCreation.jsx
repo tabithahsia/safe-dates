@@ -26,6 +26,7 @@ class DateCreation extends React.Component {
             Address:
             <input id="address" type="text" onChange={e => this.setState({location: e.target.value})} />
           </label>
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );
