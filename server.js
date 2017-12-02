@@ -80,6 +80,31 @@ app.get("/api/loggedin", (req, res) => {
   })
 })
 
+app.post("/api/date", (req, res)=>{
+  User.findOneAndUpdate({
+    _id: req.session.passport.user,
+  }, req.body).then((a, err)=>{
+    if (err) res.json(false)
+    else {
+      res.json(true)
+    }
+
+  })
+})
+
+app.put("/api/user", (req, res)=>{
+  // console.log(req.body)
+  User.findOneAndUpdate({
+    _id: req.session.passport.user,
+  }, req.body).then((a, err)=>{
+    if (err) res.json(false)
+    else {
+      res.json(true)
+    }
+
+  })
+})
+
 
 //every other page goes to our index page
 app.get('*', function (request, response){
