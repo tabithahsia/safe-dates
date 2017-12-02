@@ -1,0 +1,20 @@
+{
+  "name": "safe-dates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tabithahsia/safe-dates.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tabithahsia/safe-dates/issues"
+  },
+  "homepage": "https://github.com/tabithahsia/safe-dates#readme"
+}
