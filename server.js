@@ -14,7 +14,7 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 //server middle-wares
-app.use(express.static("../public"));
+app.use(express.static("./public"));
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,7 +36,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 var User = require('./models/User.js');
 if (process.env.MONGODB_URI || process.env.NODE_ENV === 'production') mongoose.connect(process.env.MONGODB_URI);
-else mongoose.connect("mongodb://localhost/goalsDB");
+else mongoose.connect("mongodb://localhost/safeDatesDB");
 var db = mongoose.connection;
 
 db.on('error', function(error) {
