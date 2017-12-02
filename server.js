@@ -22,17 +22,17 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //passport logic
-// require('./config/passport.js')(passport);
+require('./config/passport.js')(passport);
 
-// app.use(cookieParser('b3saf3'))
-// app.use(cookieSession({
-//   secret: 'b3saf3',
-//   cookie: {
-//     maxAge: 24 * 60 * 60 * 1000 // 24 hours
-//   }
-// }))
-// app.use(passport.initialize());
-// app.use(passport.session()); // persistent login sessions
+app.use(cookieParser('b3saf3'))
+app.use(cookieSession({
+  secret: 'b3saf3',
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
+}))
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 var User = require('./models/User.js');
 if (process.env.MONGODB_URI || process.env.NODE_ENV === 'production') mongoose.connect(process.env.MONGODB_URI);
@@ -46,6 +46,40 @@ db.on('error', function(error) {
 db.once('open', function() {
   console.log('Mongoose connection successful.');
 });
+
+app.get('/auth/facebook', passport.authenticate('facebook', { 
+      scope : ['public_profile']
+    }));
+
+    // handle the callback after facebook has authenticated the user
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect : '/',
+        failureRedirect : '/'
+    }));
+
+app.get('/api/user',(req, res) => {
+  var userToFind = '';  
+  console.log('req session is')
+  console.log(req.session)
+  if (req.session.passport) userToFind =  req.session.passport.user;
+  User.findById(userToFind, (err, foundUser) => {
+    // console.log('foundUser', foundUser);
+    // if (!foundUser) foundUser = {};
+    res.json(foundUser)
+  })
+
+})
+
+//route for server to respond if user is logged in
+app.get("/api/loggedin", (req, res) => {
+  console.log('is user logged in?')
+  console.log(`answer is ${isLoggedIn(req, res)}`)
+  res.json({
+    logged: isLoggedIn(req,res)
+  })
+})
+
 
 //every other page goes to our index page
 app.get('*', function (request, response){

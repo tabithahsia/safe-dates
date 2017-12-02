@@ -21,6 +21,9 @@ var UserSchema = new Schema({
   },
   locationNumber: {
     type: Number
+  },
+  dateTime: {
+    type: String
   }
 
 });
