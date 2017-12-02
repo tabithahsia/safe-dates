@@ -18291,10 +18291,6 @@ var _LoginOrStart = __webpack_require__(56);
 
 var _LoginOrStart2 = _interopRequireDefault(_LoginOrStart);
 
-var _UserCreation = __webpack_require__(104);
-
-var _UserCreation2 = _interopRequireDefault(_UserCreation);
-
 var _reactRouterDom = __webpack_require__(47);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -18315,36 +18311,12 @@ var App = function (_React$Component) {
 
     _this.state = {
       userLogged: false,
-      serverResponded: false,
-      username: ''
+      serverResponded: false
     };
-
-    _this.updateLogin = _this.updateLogin.bind(_this);
-    _this.updateUser = _this.updateUser.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
-    key: 'updateLogin',
-    value: function updateLogin(logincheck) {
-      var that = this;
-      that.setState({
-        serverResponded: true,
-        userLogged: logincheck.data.logged
-      });
-      console.log('updated routesR\'s login states');
-    }
-  }, {
-    key: 'updateUser',
-    value: function updateUser(foundUser) {
-      var that = this;
-      that.setState({
-        username: foundUser.username
-      });
-      console.log('updated routesR\'s user & goal states');
-      console.log('foundUser', foundUser.username);
-    }
-  }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
       console.log(this.state);
@@ -18364,17 +18336,11 @@ var App = function (_React$Component) {
           _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
-            '//Routes',
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render(props) {
                 return _react2.default.createElement(_LoginOrStart2.default, {
-                  updateLogin: _this2.updateLogin,
-                  updateUser: _this2.updateUser,
                   userLogged: _this2.state.userLogged,
                   serverResponded: _this2.state.serverResponded
                 });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/formcreation', render: function render(props) {
-                return _react2.default.createElement(_UserCreation2.default, null);
               } })
           )
         )
@@ -20624,13 +20590,8 @@ var LoginOrStart = function (_React$Component) {
             _react2.default.createElement('br', null),
             _react2.default.createElement(
               'a',
-              { href: '/auth/facebook', className: 'btn btn-primary' },
+              { href: 'auth/facebook', className: 'btn btn-primary' },
               'Login'
-            ),
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/formcreation', className: 'btn btn-info' },
-              'Go to Form (temp button)'
             )
           )
         );
@@ -20661,8 +20622,8 @@ var LoginOrStart = function (_React$Component) {
             ),
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: '/formcreation', className: 'btn btn-info' },
-              'Go to Form'
+              { to: '/alert', className: 'btn btn-info' },
+              'Alert'
             )
           )
         );
@@ -25221,134 +25182,6 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
     return targetComponent;
 };
 
-
-/***/ }),
-/* 104 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var UserCreation = function (_React$Component) {
-  _inherits(UserCreation, _React$Component);
-
-  function UserCreation(props) {
-    _classCallCheck(this, UserCreation);
-
-    var _this = _possibleConstructorReturn(this, (UserCreation.__proto__ || Object.getPrototypeOf(UserCreation)).call(this, props));
-
-    _this.state = {
-      phoneNumber: '',
-      race: '',
-      height: '',
-      gender: ''
-    };
-    return _this;
-  }
-
-  _createClass(UserCreation, [{
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'form',
-          null,
-          _react2.default.createElement(
-            'label',
-            null,
-            'Phone #:',
-            _react2.default.createElement('input', { type: 'tel', placeholder: '(888)888-8888', onChange: function onChange(e) {
-                return _this2.setState({ phoneNumber: e.target.value });
-              } }),
-            _react2.default.createElement('br', null),
-            'Gender:',
-            _react2.default.createElement(
-              'select',
-              { value: this.state.gender, onChange: function onChange(e) {
-                  return _this2.setState({ gender: e.target.value });
-                } },
-              _react2.default.createElement(
-                'option',
-                { value: 'male' },
-                'Male'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: 'female' },
-                'Female'
-              )
-            ),
-            _react2.default.createElement('br', null),
-            'Race:',
-            _react2.default.createElement(
-              'select',
-              { value: this.state.race, onChange: function onChange(e) {
-                  return _this2.setState({ race: e.target.value });
-                } },
-              _react2.default.createElement(
-                'option',
-                { value: 'white' },
-                'White'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: 'black' },
-                'Black'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: 'asian' },
-                'Asian'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: 'pacificIslander' },
-                'Pacific Islander'
-              ),
-              _react2.default.createElement(
-                'option',
-                { value: 'latino' },
-                'Hispanic/Latino'
-              )
-            ),
-            _react2.default.createElement('br', null),
-            'Height:',
-            _react2.default.createElement('input', { type: 'text', placeholder: '5ft 5in', onChange: function onChange(e) {
-                return _this2.setSTate({ height: e.target.value });
-              } })
-          ),
-          _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
-        )
-      );
-    }
-  }]);
-
-  return UserCreation;
-}(_react2.default.Component);
-
-exports.default = UserCreation;
 
 /***/ })
 /******/ ]);
