@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class UserCreation extends React.Component {
   constructor(props) {
@@ -6,16 +7,35 @@ class UserCreation extends React.Component {
 
     this.state = {
       phoneNumber: '',
-      race: '',
+      race: 'White',
       height: '',
-      gender: ''
+      gender: 'Male'
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.props.updateComplete();
+    var newState = this.state;
+    newState.userComplete = true;
+    axios.put('/api/user/', newState).then(data =>{
+      if (data.data){
+        window.location="/"
+      } else {
+        alert("There was an error, please check your inputs")
+      }
+    })
+  }
+      
+  componentDidUpdate(){
+    console.log(this.state)
   }
 
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Phone #:
             <input type="tel" placeholder="(888)888-8888" onChange={e => this.setState({ phoneNumber: e.target.value })} />
@@ -36,7 +56,7 @@ class UserCreation extends React.Component {
             </select>
             <br/>
             Height:
-            <input type="text" placeholder="5ft 5in" onChange={e => this.setSTate({height: e.target.value})}/>
+            <input type="text" placeholder="5ft 5in" onChange={e => this.setState({height: e.target.value})}/>
           </label>
           <input type="submit" value="Submit" />
         </form>
