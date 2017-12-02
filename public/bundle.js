@@ -25193,9 +25193,131 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
 
 /***/ }),
 /* 104 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (25:14)\n\n\u001b[0m \u001b[90m 23 | \u001b[39m            \u001b[33mGender\u001b[39m\u001b[33m:\u001b[39m\n \u001b[90m 24 | \u001b[39m            \u001b[33m<\u001b[39m\u001b[33mselect\u001b[39m value \u001b[33m=\u001b[39m {\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate\u001b[33m.\u001b[39mgender} onChange\u001b[33m=\u001b[39m{e \u001b[33m=>\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39msetState({ gender\u001b[33m:\u001b[39m e\u001b[33m.\u001b[39mtarget\u001b[33m.\u001b[39mvalue })}\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 | \u001b[39m              \u001b[33m<\u001b[39m\u001b[33moption\u001b[39m value\u001b[33m=\u001b[39m\u001b[32m\"male\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mMale\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33moption\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m    | \u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 | \u001b[39m              \u001b[33m<\u001b[39m\u001b[33moption\u001b[39m value\u001b[33m=\u001b[39m\u001b[32m\"female\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mFemale\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33moption\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 27 | \u001b[39m            \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mselect\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 28 | \u001b[39m            \u001b[33m<\u001b[39m\u001b[33mbr\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UserCreation = function (_React$Component) {
+  _inherits(UserCreation, _React$Component);
+
+  function UserCreation(props) {
+    _classCallCheck(this, UserCreation);
+
+    var _this = _possibleConstructorReturn(this, (UserCreation.__proto__ || Object.getPrototypeOf(UserCreation)).call(this, props));
+
+    _this.state = {
+      phoneNumber: '',
+      race: '',
+      height: '',
+      gender: ''
+    };
+    return _this;
+  }
+
+  _createClass(UserCreation, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          null,
+          _react2.default.createElement(
+            'label',
+            null,
+            'Phone #:',
+            _react2.default.createElement('input', { type: 'tel', placeholder: '(888)888-8888', onChange: function onChange(e) {
+                return _this2.setState({ phoneNumber: e.target.value });
+              } }),
+            _react2.default.createElement('br', null),
+            'Gender:',
+            _react2.default.createElement(
+              'select',
+              { value: this.state.gender, onChange: function onChange(e) {
+                  return _this2.setState({ gender: e.target.value });
+                } },
+              _react2.default.createElement(
+                'option',
+                { value: 'male' },
+                'Male'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'female' },
+                'Female'
+              )
+            ),
+            _react2.default.createElement('br', null),
+            'Race:',
+            _react2.default.createElement(
+              'select',
+              { value: this.state.race, onChange: function onChange(e) {
+                  return _this2.setState({ race: e.target.value });
+                } },
+              _react2.default.createElement(
+                'option',
+                { value: 'white' },
+                'White'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'black' },
+                'Black'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'asian' },
+                'Asian'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'pacificIslander' },
+                'Pacific Islander'
+              ),
+              _react2.default.createElement(
+                'option',
+                { value: 'latino' },
+                'Hispanic/Latino'
+              )
+            ),
+            _react2.default.createElement('br', null),
+            'Height:',
+            _react2.default.createElement('input', { type: 'text', placeholder: '5ft 5in', onChange: function onChange(e) {
+                return _this2.setSTate({ height: e.target.value });
+              } })
+          ),
+          _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+        )
+      );
+    }
+  }]);
+
+  return UserCreation;
+}(_react2.default.Component);
+
+exports.default = UserCreation;
 
 /***/ })
 /******/ ]);
