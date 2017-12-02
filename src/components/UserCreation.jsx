@@ -7,7 +7,8 @@ class UserCreation extends React.Component {
     this.state = {
       phoneNumber: '',
       race: '',
-      height: ''
+      height: '',
+      gender: ''
     }
   }
 
@@ -18,6 +19,13 @@ class UserCreation extends React.Component {
           <label>
             Phone #:
             <input type="tel" placeholder="(888)888-8888" onChange={e => this.setState({ phoneNumber: e.target.value })} />
+            <br/>
+            Gender:
+            <select value = {this.state.gender} onChange={e => this.setState({ gender: e.target.value })}>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+            <br/>
             Race:
             <select value = {this.state.race} onChange={e => this.setState({ race: e.target.value })}>
               <option value="white">White</option>
@@ -26,10 +34,11 @@ class UserCreation extends React.Component {
               <option value="pacificIslander">Pacific Islander</option>
               <option value="latino">Hispanic/Latino</option>
             </select>
+            <br/>
             Height:
-              
-
+            <input type="text" placeholder="5ft 5in" onChange={e => this.setSTate({height: e.target.value})}/>
           </label>
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );
