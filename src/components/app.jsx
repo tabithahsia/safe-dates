@@ -11,7 +11,29 @@ class App extends React.Component {
     this.state = {
       userLogged: false,
       serverResponded: false,
+      username: ''
     }
+
+    this.updateLogin = this.updateLogin.bind(this);
+    this.updateUser = this.updateUser.bind(this)
+  }
+
+  updateLogin(logincheck){
+    var that = this;
+    that.setState({
+      serverResponded: true,
+      userLogged: logincheck.data.logged,
+    })
+    console.log('updated routesR\'s login states')
+  }
+
+  updateUser(foundUser){
+    var that = this;
+    that.setState({
+      username: foundUser.username
+    })
+    console.log('updated routesR\'s user & goal states');
+    console.log('foundUser', foundUser.username)
   }
 
   componentDidUpdate(){
@@ -27,6 +49,8 @@ class App extends React.Component {
               //Routes
               <Route exact path="/" render={(props) => (
                 <LoginOrStart
+                updateLogin={this.updateLogin}
+                updateUser={this.updateUser}
                 userLogged={this.state.userLogged}
                 serverResponded={this.state.serverResponded}
                 />
