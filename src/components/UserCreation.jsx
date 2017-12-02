@@ -17,7 +17,18 @@ class UserCreation extends React.Component {
         <form>
           <label>
             Phone #:
-            <input type="tel" placeholder="(888) 888-8888" onChange={e => this.setState({ phoneNumber: e.target.value })} />
+            <input type="tel" placeholder="(888)888-8888" onChange={e => this.setState({ phoneNumber: e.target.value })} />
+            Race:
+            <select value = {this.state.race} onChange={e => this.setState({ race: e.target.value })}>
+              <option value="white">White</option>
+              <option value="black">Black</option>
+              <option value="asian">Asian</option>
+              <option value="pacificIslander">Pacific Islander</option>
+              <option value="latino">Hispanic/Latino</option>
+            </select>
+            Height:
+              
+
           </label>
         </form>
       </div>
