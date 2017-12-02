@@ -1,4 +1,4 @@
-var GoogleStrategy = require('passport-facebook').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../models/User.js');
 
 var passport = function(passport) {
@@ -33,7 +33,8 @@ var passport = function(passport) {
 	passport.use(new FacebookStrategy({
 	    clientID: clientID,
 	    clientSecret: clientSecret,
-	    callbackURL: callbackURL
+      callbackURL: callbackURL,
+      profileFields:['id', 'displayName', 'photos']
     },
 	  function(accessToken, refreshToken, profile, done) {
       // console.log("access", accessToken)
@@ -42,7 +43,7 @@ var passport = function(passport) {
       process.nextTick(function(){
         console.log('trying to find user')
         // console.log(`profile displayname is ${profile.displayName}`)
-        User.findOne({'username': profile.displayName}, function(err, user){
+        User.findOne({ 'fullName' : profile.displayName}, function(err, user){
           if(user){
             console.log('user found!')
             return done(null, user);
@@ -50,7 +51,7 @@ var passport = function(passport) {
           else {
             console.log('creating a new user');
             User.create({
-              'username' : profile.displayName,
+              'fullName' : profile.displayName
             }, function(err, data){
               if (err) {
                 console.log(err)
