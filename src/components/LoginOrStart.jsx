@@ -35,7 +35,6 @@ class LoginOrStart extends React.Component {
               <h4 className="card-text">Log in with Facebook and stay safe during date nights!.</h4>
               <br/>
               <a href="/auth/facebook" className="btn btn-primary">Login</a>
-              <Link to="/formcreation" className="btn btn-info">Go to Form (temp button)</Link>
           </div>
         </div>
       )
@@ -48,8 +47,10 @@ class LoginOrStart extends React.Component {
               <h4 className="card-text">Create Profile or Create Date Night Alert</h4>
               <br/>
 
-              <Link to="/profile" className="btn btn-success create_btn">Profile</Link>
-              <Link to="/formcreation" className="btn btn-info">Go to Form</Link>
+              {
+                this.props.userComplete? <Link to='/dateCreation' className="btn btn-info create_btn">Create Date Alert</Link> : <h6>Please create profile</h6>
+              }
+              <Link to="/userCreation" className="btn btn-success create_btn">Update User Information</Link>
 
           </div>
         </div>

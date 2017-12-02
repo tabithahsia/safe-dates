@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header.jsx';
 import LoginOrStart from './LoginOrStart.jsx';
 import UserCreation from './UserCreation.jsx';
+import DateCreation from './DateCreation.jsx';
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 
 class App extends React.Component {
@@ -11,11 +12,17 @@ class App extends React.Component {
     this.state = {
       userLogged: false,
       serverResponded: false,
-      username: ''
+      username: '',
+      userComplete: false
     }
 
     this.updateLogin = this.updateLogin.bind(this);
-    this.updateUser = this.updateUser.bind(this)
+    this.updateUser = this.updateUser.bind(this);
+    this.updateComplete = this.updateComplete.bind(this)
+
+  }
+  updateComplete(){
+    this.setState({userComplete: true})
   }
 
   updateLogin(logincheck){
@@ -30,10 +37,11 @@ class App extends React.Component {
   updateUser(foundUser){
     var that = this;
     that.setState({
-      username: foundUser.username
+      username: foundUser.fullName,
+      userComplete: foundUser.userComplete
     })
-    console.log('updated routesR\'s user & goal states');
-    console.log('foundUser', foundUser.username)
+    console.log('updated routesR\'s user and setting');
+    console.log('foundUser', foundUser.fullName)
   }
 
   componentDidUpdate(){
@@ -53,11 +61,18 @@ class App extends React.Component {
                 updateUser={this.updateUser}
                 userLogged={this.state.userLogged}
                 serverResponded={this.state.serverResponded}
+                userComplete={this.state.userComplete}
                 />
               )}/>
 
-            <Route exact path="/formcreation" render={(props) => (
-                <UserCreation/>
+            <Route exact path="/userCreation" render={(props) => (
+                <UserCreation
+                updateComplete={this.updateComplete}
+                />
+              )}/>
+              <Route exact path="/dateCreation" render={(props) => (
+                <DateCreation
+                />
               )}/>
             </Switch>
         </div>
