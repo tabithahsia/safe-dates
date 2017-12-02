@@ -34,7 +34,8 @@ class LoginOrStart extends React.Component {
               <br />
               <h4 className="card-text">Log in with Facebook and stay safe during date nights!.</h4>
               <br/>
-              <a href="auth/facebook" className="btn btn-primary">Login</a>
+              <a href="/auth/facebook" className="btn btn-primary">Login</a>
+              <Link to="/formcreation" className="btn btn-info">Go to Form (temp button)</Link>
           </div>
         </div>
       )
@@ -48,7 +49,7 @@ class LoginOrStart extends React.Component {
               <br/>
 
               <Link to="/profile" className="btn btn-success create_btn">Profile</Link>
-              <Link to="/alert" className="btn btn-info">Alert</Link>
+              <Link to="/formcreation" className="btn btn-info">Go to Form</Link>
 
           </div>
         </div>
