@@ -16,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/tabithahsia/safe-dates/issues"
   },
-  "homepage": "https://github.com/tabithahsia/safe-dates#readme"
+  "homepage": "https://github.com/tabithahsia/safe-dates#readme",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.5",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.12.1",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1"
+  }
 }
