@@ -18291,10 +18291,6 @@ var _LoginOrStart = __webpack_require__(56);
 
 var _LoginOrStart2 = _interopRequireDefault(_LoginOrStart);
 
-var _UserCreation = __webpack_require__(104);
-
-var _UserCreation2 = _interopRequireDefault(_UserCreation);
-
 var _reactRouterDom = __webpack_require__(47);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -18340,15 +18336,11 @@ var App = function (_React$Component) {
           _react2.default.createElement(
             _reactRouterDom.Switch,
             null,
-            '//Routes',
             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render(props) {
                 return _react2.default.createElement(_LoginOrStart2.default, {
                   userLogged: _this2.state.userLogged,
                   serverResponded: _this2.state.serverResponded
                 });
-              } }),
-            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/formcreation', render: function render(props) {
-                return _react2.default.createElement(_UserCreation2.default, null);
               } })
           )
         )
@@ -25190,12 +25182,6 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
     return targetComponent;
 };
 
-
-/***/ }),
-/* 104 */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: SyntaxError: Unexpected token (25:14)\n\n\u001b[0m \u001b[90m 23 | \u001b[39m            \u001b[33mGender\u001b[39m\u001b[33m:\u001b[39m\n \u001b[90m 24 | \u001b[39m            \u001b[33m<\u001b[39m\u001b[33mselect\u001b[39m value \u001b[33m=\u001b[39m {\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate\u001b[33m.\u001b[39mgender} onChange\u001b[33m=\u001b[39m{e \u001b[33m=>\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39msetState({ gender\u001b[33m:\u001b[39m e\u001b[33m.\u001b[39mtarget\u001b[33m.\u001b[39mvalue })}\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 25 | \u001b[39m              \u001b[33m<\u001b[39m\u001b[33moption\u001b[39m value\u001b[33m=\u001b[39m\u001b[32m\"male\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mMale\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33moption\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m    | \u001b[39m              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 26 | \u001b[39m              \u001b[33m<\u001b[39m\u001b[33moption\u001b[39m value\u001b[33m=\u001b[39m\u001b[32m\"female\"\u001b[39m\u001b[33m>\u001b[39m\u001b[33mFemale\u001b[39m\u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33moption\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 27 | \u001b[39m            \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mselect\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 28 | \u001b[39m            \u001b[33m<\u001b[39m\u001b[33mbr\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n");
 
 /***/ })
 /******/ ]);
