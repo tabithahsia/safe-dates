@@ -22,7 +22,10 @@ var UserSchema = new Schema({
   locationNumber: {
     type: Number
   },
-  dateTime: {
+  time: {
+    type: String
+  },
+  date: {
     type: String
   },
   height: {
