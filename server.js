@@ -23,7 +23,6 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 //passport logic
 require('./config/passport.js')(passport);
-require('./twilio.js')()
 
 app.use(cookieParser('b3saf3'))
 app.use(cookieSession({
