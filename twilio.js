@@ -1,19 +1,22 @@
-const accountSid = 'AC21617f2a3aa221f4ab07b61c1aa610d9';
-const authToken = '64841307c41d15366f1910f56856d54b';
+const twilioKeys = require("./config/auth.js").twilio;
+const accountSid = twilioKeys.accountSid;
+const authToken = twilioKeys.authToken;
 const client = require('twilio')(accountSid, authToken);
 var User = require('./models/User.js');
 
 
 var twilioFunc = ()=>{
   var today = new Date();
+  var todayDate = today.getDate()
   User.findOne({
-    date: `${today.getFullYear()}-${today.getMonth()+1}-0${today.getDate()}`,
+    date: `${today.getFullYear()}-${today.getMonth()+1}-${todayDate.length === 1 ? '0' + todayDate : todayDate}`,
     time: `${today.getHours()}:${today.getMinutes()}`
   }).then(result=>{
     if (result){
+      console.log("result is", result)
       client.calls.create({
   url: "http://demo.twilio.com/docs/voice.xml",
-  to: '+'+result.phoneNumber,
+  to: result.locationNumber,
   from: '+15103744057',
 }, function(err, call) {
   if(err) {
