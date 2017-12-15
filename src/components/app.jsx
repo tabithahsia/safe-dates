@@ -62,6 +62,7 @@ class App extends React.Component {
                 userLogged={this.state.userLogged}
                 serverResponded={this.state.serverResponded}
                 userComplete={this.state.userComplete}
+                username={this.state.username}
                 />
               )}/>
 

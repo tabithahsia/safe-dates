@@ -38,7 +38,7 @@ class UserCreation extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Phone #:
-            <input type="tel" placeholder="(888)888-8888" onChange={e => this.setState({ phoneNumber: e.target.value })} />
+            <input type="tel" placeholder="+14151234567" onChange={e => this.setState({ phoneNumber: e.target.value })} />
             <br/>
             Gender:
             <select value = {this.state.gender} onChange={e => this.setState({ gender: e.target.value })}>
@@ -56,7 +56,7 @@ class UserCreation extends React.Component {
             </select>
             <br/>
             Height:
-            <input type="text" placeholder="5ft 5in" onChange={e => this.setState({height: e.target.value})}/>
+            <input type="text" placeholder="5 feet 5 inches" onChange={e => this.setState({height: e.target.value})}/>
           </label>
           <input type="submit" value="Submit" />
         </form>
