@@ -42,7 +42,7 @@ class LoginOrStart extends React.Component {
       var content = (
         <div className="container card text-center login">
           <div className="card-block">
-              <h1 className="card-title">Welcome to {appName}, {this.props.username}</h1>
+              <h1 className="card-title">Welcome to {appName}</h1>
               <br />
               <h4 className="card-text">Create Profile or Create Date Night Alert</h4>
               <br/>
