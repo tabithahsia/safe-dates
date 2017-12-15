@@ -8,7 +8,8 @@ class DateCreation extends React.Component {
     this.state = {
       date:'',
       time: '',
-      location: ''
+      location: '',
+      locationNumber: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     
@@ -46,7 +47,7 @@ class DateCreation extends React.Component {
             <input id="address" type="text" onChange={e => this.setState({location: e.target.value})} />
             PhoneNumber:
             <br/>
-            <input id="phoneNumber" type="text" onChange={e => this.setState({phoneNumber: e.target.value})} />
+            <input id="phoneNumber" type="text" onChange={e => this.setState({locationNumber: e.target.value})} />
           </label>
           <input type="submit" value="Submit" />
         </form>
