@@ -25,6 +25,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 require('./config/passport.js')(passport);
 require('./twilio2.js')()
 
+
 app.use(cookieParser('b3saf3'))
 app.use(cookieSession({
   secret: 'b3saf3',
@@ -112,8 +113,6 @@ app.get('*', function (request, response){
   console.log('showing index page!');
   response.redirect('/');
 })
-
-//================================
 
 
 app.listen(port, function() {
