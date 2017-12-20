@@ -113,8 +113,6 @@ app.get('*', function (request, response){
   response.redirect('/');
 })
 
-//================================
-
 
 app.listen(port, function() {
   console.log(`Server is running on port ${port}`);
