@@ -1,7 +1,19 @@
-var FacebookStrategy = require('passport-facebook').Strategy;
-var User = require('../models/User.js');
+const FacebookStrategy = require('passport-facebook').Strategy;
+const User = require('../models/User.js');
 
-var passport = function(passport) {
+module.exports = (passport) => {
+  let clientID, clientSecret, callbackURL; 
+  if (process.env.MONGODB_URI || process.env.PORT){
+    clientID = process.env.facebook_CLIENT_ID;
+    clientSecret = process.env.facebook_CLIENT_SECRET;
+    callbackURL = process.env.facebook_CALLBACK_URL;
+  } else {
+    let configAuth = require('./auth.js');
+    clientID = configAuth.facebookAuth.clientID;
+    clientSecret = configAuth.facebookAuth.clientSecret;
+    callbackURL = configAuth.facebookAuth.callbackURL;
+  }
+
 	passport.serializeUser(function(user, done){
     // console.log('serializeUser is being called!')
     // console.log('user obj is')
@@ -15,20 +27,6 @@ var passport = function(passport) {
 			done(null, user);
 		});
   });
-  
-  if (process.env.MONGODB_URI || process.env.PORT){
-    var clientID = process.env.facebook_CLIENT_ID;
-    var clientSecret = process.env.facebook_CLIENT_SECRET;
-    var callbackURL = process.env.facebook_CALLBACK_URL;
-  } else {
-    var configAuth = require('./auth.js');
-    var clientID = configAuth.facebookAuth.clientID;
-	  var clientSecret = configAuth.facebookAuth.clientSecret;
-	  var callbackURL = configAuth.facebookAuth.callbackURL;
-
-  }
-
-  console.log(process.env.facebook_CLIENT_ID, 'CLIENT ID IN PASSPORT')
 
 	passport.use(new FacebookStrategy({
 	    clientID: clientID,
@@ -41,22 +39,22 @@ var passport = function(passport) {
       // console.log("refresh", refreshToken)
       // console.log("profile", profile)
       process.nextTick(function(){
-        console.log('trying to find user')
+        // console.log('trying to find user')
         // console.log(`profile displayname is ${profile.displayName}`)
         User.findOne({ 'fullName' : profile.displayName}, function(err, user){
           if(user){
-            console.log('user found!')
+            // console.log('user found!')
             return done(null, user);
           }
           else {
-            console.log('creating a new user');
+            // console.log('creating a new user');
             User.create({
               'fullName' : profile.displayName
             }, function(err, data){
               if (err) {
                 console.log(err)
               } else {
-                console.log('done creating a new user')
+                // console.log('done creating a new user')
                 console.log(data);
                 return done(null, data)
               };
@@ -66,8 +64,4 @@ var passport = function(passport) {
       })
     }
 	));
-
 };
-
-
-module.exports = passport; 
