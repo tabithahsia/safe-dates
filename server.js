@@ -38,6 +38,9 @@ else mongoose.connect("mongodb://localhost/safeDatesDB");
 mongoose.connection.on('error', (error) => console.log('Mongoose Error: ', error));
 mongoose.connection.once('open', () => console.log('Mongoose connection successful.'));
 
+//Twilio interval logic
+require('./twilio2.js')();
+
 //Twilio routes
 require('./routes/twilio_routes.js')(app);
 
