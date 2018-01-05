@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import TimePicker from 'rc-time-picker';;
 
 class DateCreation extends React.Component {
   constructor(props) {
@@ -10,8 +12,7 @@ class DateCreation extends React.Component {
       time: '',
       location: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    
+    this.locationChange = this.locationChange.bind(this)
   }
 
   componentDidUpdate(){
@@ -30,24 +31,62 @@ class DateCreation extends React.Component {
     })
   }
 
+  handleChange(e){
+    this.setState({[e.target.name]: e.target.value })
+  }
+
+  locationChange(address){
+    this.setState({location: address })
+  }
+
   render() {
+
+    const inputProps = {
+      value: this.state.location,
+      onChange: this.locationChange,
+      type: 'search',
+      placeholder: 'Search restaurants and bars...'
+    };
+    const cssClasses = {
+    input: 'form-control',
+    autocompleteContainer: 'my-autocomplete-container'
+  }
+
+
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Date:
-            <br/>
-            <input id="date" type="date" onChange={e => this.setState({ date: e.target.value })} />
-            <br/>
-            Time:
-            <br/>
-            <input id="time" type="time" onChange={e => this.setState({time: e.target.value })} />
-            Address:
-            <input id="address" type="text" onChange={e => this.setState({location: e.target.value})} />
-            PhoneNumber:
-            <br/>
-            <input id="phoneNumber" type="text" onChange={e => this.setState({phoneNumber: e.target.value})} />
-          </label>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <div className="form-group col-6 col-sm-6 col-md-3">
+            <label>Date</label>
+            <input name="date" 
+              type="date" 
+              onChange={this.handleChange.bind(this)} 
+              value={this.state.date}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group col-6 col-sm-6 col-md-3">
+            <label>Time</label>
+            <input name="time" 
+              type="time" 
+              onChange={this.handleChange.bind(this)} 
+              value={this.state.time}
+              className="form-control"
+            />
+          </div> 
+          <div className="form-group col-6 col-sm-6 col-md-3">
+            <label>Address/Name of venue</label>
+            {/* <input name="location" 
+              type="text" 
+              onChange={this.handleChange.bind(this)} 
+              value={this.state.location}
+            /> */}
+            <PlacesAutocomplete
+              inputProps={inputProps}
+              classNames={cssClasses}
+              name="location"
+            />
+          </div>
           <input type="submit" value="Submit" />
         </form>
       </div>

@@ -35,4 +35,4 @@ const twilioFunc = () => {
   })
 }
 
-module.exports = () => setInterval(twilioFunc, 30000)
+module.exports = () => setInterval(twilioFunc, 60000)

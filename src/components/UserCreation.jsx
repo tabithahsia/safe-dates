@@ -27,7 +27,10 @@ class UserCreation extends React.Component {
       }
     })
   }
-      
+  componentWillMount(){
+    
+  }
+  
   componentDidUpdate(){
     console.log(this.state)
   }

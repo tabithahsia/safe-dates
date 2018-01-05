@@ -60,3 +60,4 @@ typings/
 
 config/auth.js
 yarn.lock
+.DS_Store

@@ -9,7 +9,7 @@ mongoose.Promise = Promise;
 
 //express server
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 7233;
 // const router = express.Router();
 
 //server middle-wares
@@ -39,7 +39,7 @@ mongoose.connection.on('error', (error) => console.log('Mongoose Error: ', error
 mongoose.connection.once('open', () => console.log('Mongoose connection successful.'));
 
 //Twilio interval logic
-require('./twilio2.js')();
+require('./twilio_interval.js')();
 
 //Twilio routes
 require('./routes/twilio_routes.js')(app);

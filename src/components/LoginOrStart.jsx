@@ -8,7 +8,7 @@ class LoginOrStart extends React.Component {
     super(props);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     var that = this; 
     axios.get('/api/loggedin').then((logincheck) =>{
       console.log('/api/loggedin returns')
@@ -19,7 +19,7 @@ class LoginOrStart extends React.Component {
         if(foundUser.data !== null) {
           that.props.updateUser(foundUser.data)
         }
-        that.render();
+        // that.render();
       })
     })
   }

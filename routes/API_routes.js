@@ -34,7 +34,7 @@ module.exports = (app) => {
   app.post("/api/date", (req, res) => {
     User.findOneAndUpdate({
       _id: req.session.passport.user,
-    }, req.body).then((a, err) => {
+    }, req.body).then((dont_matter, err) => {
       if (err) res.json(false)
       else res.json(true)
     })
@@ -44,7 +44,7 @@ module.exports = (app) => {
     // console.log(req.body)
     User.findOneAndUpdate({
       _id: req.session.passport.user,
-    }, req.body).then((a, err) => {
+    }, req.body).then((dont_matter, err) => {
       if (err) res.json(false)
       else res.json(true)
     })
