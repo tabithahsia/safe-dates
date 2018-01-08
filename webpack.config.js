@@ -17,7 +17,7 @@ module.exports = {
         include: SRC_DIR,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'env']
+          presets: ['react', 'env', 'stage-2']
         }
       },
       {
@@ -31,10 +31,16 @@ module.exports = {
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
         loader: 'url-loader?limit=100000'
-      }
+      }, 
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        loader:  'style-loader!css-loader'
+    } ,
+      { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' }
     ]
   },
   resolve: {
-    extensions: ['.js', '.json', '.jsx']
+    extensions: ['.js', '.json', '.jsx', '.less', '.css']
   },
 }

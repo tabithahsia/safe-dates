@@ -8,7 +8,7 @@ class LoginOrStart extends React.Component {
     super(props);
   }
 
-  componentWillMount(){
+  componentDidMount(){
     var that = this; 
     axios.get('/api/loggedin').then((logincheck) =>{
       console.log('/api/loggedin returns')

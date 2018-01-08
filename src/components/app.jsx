@@ -51,7 +51,7 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div className='container-fluid' id='big-container'>
+        <div className='container-fluid' id='big-container' style={{backgroundColor: 'teal'}}>
           <Header />
             <Switch>
               //Routes
