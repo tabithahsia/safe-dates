@@ -41859,6 +41859,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
@@ -41905,7 +41907,10 @@ var DateCreation = function (_React$Component) {
       // date:'',
       // time: '',
       m: (0, _moment2.default)(),
-      location: ''
+      location: '',
+      locationNumber: '',
+      loading: false,
+      numberFound: true
     };
     _this.locationChange = _this.locationChange.bind(_this);
     return _this;
@@ -41936,21 +41941,52 @@ var DateCreation = function (_React$Component) {
     }
   }, {
     key: 'locationChange',
-    value: function locationChange(address) {
-      this.setState({ location: address });
+    value: function locationChange(location) {
+      this.setState({ location: location });
+    }
+  }, {
+    key: 'locationSelect',
+    value: function locationSelect(location, placeId) {
+      var that = this;
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -33.866, lng: 151.196 },
+        zoom: 15
+      });
+      var service = new google.maps.places.PlacesService(map);
+      service.getDetails({ placeId: placeId }, function (place, status) {
+        // console.log(place)
+        console.log(status);
+        if (place.international_phone_number) {
+          that.setState({
+            location: location,
+            locationNumber: place.international_phone_number
+          });
+        } else {
+          that.setState({
+            numberFound: false,
+            locationNumber: 'Google cannot find a phone number for this place; please enter manually'
+          });
+        }
+      });
+    }
+  }, {
+    key: 'clearInput',
+    value: function clearInput() {
+      this.setState({ locationNumber: '' });
     }
   }, {
     key: 'momentChange',
     value: function momentChange(m) {
       this.setState({ m: m });
     }
+    //TODO
+
   }, {
-    key: 'dummy',
-    value: function dummy() {}
+    key: 'momentSave',
+    value: function momentSave() {}
   }, {
     key: 'render',
     value: function render() {
-
       var inputProps = {
         value: this.state.location,
         onChange: this.locationChange,
@@ -41961,6 +41997,14 @@ var DateCreation = function (_React$Component) {
         input: 'form-control',
         autocompleteContainer: 'my-autocomplete-container'
       };
+      var opts = {};
+      if (!this.state.numberFound) {
+        if (!this.state.locationNumber) {
+          opts['placeholder'] = 'Google cannot find a phone number for this place; please enter manually';
+        }
+      } else {
+        opts['readOnly'] = 'readOnly';
+      }
 
       return _react2.default.createElement(
         'div',
@@ -41970,7 +42014,7 @@ var DateCreation = function (_React$Component) {
           { onSubmit: this.handleSubmit.bind(this) },
           _react2.default.createElement(
             'div',
-            { className: 'form-group col-6 col-sm-6 col-md-3' },
+            { className: 'form-group col-xs-12 col-sm-6' },
             _react2.default.createElement(
               'label',
               null,
@@ -41987,7 +42031,7 @@ var DateCreation = function (_React$Component) {
               _react2.default.createElement(_inputMoment2.default, {
                 moment: this.state.m,
                 onChange: this.momentChange.bind(this),
-                onSave: this.dummy.bind(this),
+                onSave: this.momentSave.bind(this),
                 minStep: 15 // default
                 , name: 'moment'
               })
@@ -41995,7 +42039,7 @@ var DateCreation = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'form-group col-6 col-sm-6 col-md-3' },
+            { className: 'form-group col-xs-12 col-sm-6' },
             _react2.default.createElement(
               'label',
               null,
@@ -42004,8 +42048,16 @@ var DateCreation = function (_React$Component) {
             _react2.default.createElement(_reactPlacesAutocomplete2.default, {
               inputProps: inputProps,
               classNames: cssClasses,
+              onSelect: this.locationSelect.bind(this),
               name: 'location'
-            })
+            }),
+            _react2.default.createElement('div', { id: 'map' }),
+            _react2.default.createElement('input', _extends({ name: 'locationNumber',
+              value: this.state.locationNumber,
+              className: 'form-control',
+              onFocus: this.clearInput.bind(this),
+              onChange: this.handleChange.bind(this)
+            }, opts))
           ),
           _react2.default.createElement('input', { type: 'submit', value: 'Submit' })
         )
