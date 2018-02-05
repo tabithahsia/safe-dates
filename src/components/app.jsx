@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from './Header.jsx';
-import LoginOrStart from './LoginOrStart.jsx';
-import UserCreation from './UserCreation.jsx';
-import DateCreation from './DateCreation.jsx';
 import { Route, BrowserRouter, Switch } from "react-router-dom";
+import Header from './Header';
+import LoginOrStart from './LoginOrStart';
+import UserCreation from './UserCreation';
+import DateCreation from './DateCreation';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,24 +19,26 @@ class App extends React.Component {
     this.updateLogin = this.updateLogin.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.updateComplete = this.updateComplete.bind(this)
-
-  }
-  updateComplete(){
-    this.setState({userComplete: true})
   }
 
-  updateLogin(logincheck){
-    var that = this;
-    that.setState({
+  componentDidUpdate() {
+    console.log(this.state)
+  }
+
+  updateComplete() {
+    this.setState({ userComplete: true })
+  }
+
+  updateLogin(logincheck) {
+    this.setState({
       serverResponded: true,
       userLogged: logincheck.data.logged,
     })
     console.log('updated routesR\'s login states')
   }
 
-  updateUser(foundUser){
-    var that = this;
-    that.setState({
+  updateUser(foundUser) {
+    this.setState({
       username: foundUser.fullName,
       userComplete: foundUser.userComplete
     })
@@ -44,9 +46,6 @@ class App extends React.Component {
     console.log('foundUser', foundUser.fullName)
   }
 
-  componentDidUpdate(){
-    console.log(this.state)
-  }
 
   render() {
     return (

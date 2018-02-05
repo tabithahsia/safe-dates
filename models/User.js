@@ -1,13 +1,14 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
 
-var UserSchema = new Schema({
+const { Schema } = mongoose;
+
+const UserSchema = new Schema({
   fullName: {
     type: String,
     unique: true,
     required: true
   },
-	phoneNumber: {
+  phoneNumber: {
     type: Number
   },
   race: {
@@ -35,9 +36,6 @@ var UserSchema = new Schema({
     type: Boolean,
     default: false
   }
-
-
 });
 
-var User = mongoose.model("User", UserSchema);
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);
