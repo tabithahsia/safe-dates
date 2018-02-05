@@ -27,6 +27,13 @@
     "no-else-return": [0, { "allowElseIf": true }],
     "one-var": 0,
     "one-var-declaration-per-line": ["error", "initializations"],
-    "global-require":0
+    "global-require": 0,
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "components": [ "Link" ],
+      "specialLink": [ "to", "hrefLeft", "hrefRight" ],
+      "aspects": [ "noHref", "invalidHref", "preferButton" ]
+    }],
+    "react/no-unused-state": [1]
+    
   }
 }

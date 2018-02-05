@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter, Switch } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Header from './Header';
 import LoginOrStart from './LoginOrStart';
 import UserCreation from './UserCreation';
@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state)
+    console.log(this.state);
   }
 
   updateComplete() {
@@ -42,41 +42,51 @@ class App extends React.Component {
       username: foundUser.fullName,
       userComplete: foundUser.userComplete
     })
-    console.log('updated routesR\'s user and setting');
-    console.log('foundUser', foundUser.fullName)
+    // console.log('updated routesR\'s user and setting');
+    // console.log('foundUser', foundUser.fullName)
   }
-
 
   render() {
     return (
       <BrowserRouter>
-        <div className='container-fluid' id='big-container' style={{backgroundColor: 'teal'}}>
+        <div className="container-fluid" id="big-container" style={{ backgroundColor: 'teal' }}>
           <Header />
-            <Switch>
-              //Routes
-              <Route exact path="/" render={(props) => (
+          <Switch>
+            {/* Routes */}
+            <Route
+              exact
+              path="/"
+              render={() => (
                 <LoginOrStart
-                updateLogin={this.updateLogin}
-                updateUser={this.updateUser}
-                userLogged={this.state.userLogged}
-                serverResponded={this.state.serverResponded}
-                userComplete={this.state.userComplete}
+                  updateLogin={this.updateLogin}
+                  updateUser={this.updateUser}
+                  userLogged={this.state.userLogged}
+                  serverResponded={this.state.serverResponded}
+                  userComplete={this.state.userComplete}
                 />
-              )}/>
+              )}
+            />
 
-            <Route exact path="/userCreation" render={(props) => (
+            <Route
+              exact
+              path="/userCreation"
+              render={() => (
                 <UserCreation
-                updateComplete={this.updateComplete}
+                  updateComplete={this.updateComplete}
                 />
-              )}/>
-              <Route exact path="/dateCreation" render={(props) => (
-                <DateCreation
-                />
-              )}/>
-            </Switch>
+              )}
+            />
+            <Route
+              exact
+              path="/dateCreation"
+              render={() => (
+                <DateCreation />
+              )}
+            />
+          </Switch>
         </div>
       </BrowserRouter>
-    )
+    );
   }
 }
 

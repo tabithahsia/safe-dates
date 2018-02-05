@@ -19,13 +19,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-app.use(cookieParser('b3saf3'))
+app.use(cookieParser('b3saf3'));
 app.use(cookieSession({
   secret: 'b3saf3',
   cookie: {
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
-}))
+}));
 
 // passport logic
 require('./config/passport.js')(passport);

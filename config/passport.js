@@ -9,7 +9,9 @@ module.exports = passport => {
     callbackURL = process.env.facebook_CALLBACK_URL;
   } else {
     const configAuth = require('./auth.js');
-    [clientID, clientSecret, callbackURL] = configAuth.facebookAuth;
+    clientID = configAuth.facebookAuth.clientID;
+    clientSecret = configAuth.facebookAuth.clientSecret;
+    callbackURL = configAuth.facebookAuth.callbackURL;
   }
 
   passport.serializeUser((user, done) => {

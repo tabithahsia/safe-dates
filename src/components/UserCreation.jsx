@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 class UserCreation extends React.Component {
@@ -13,53 +14,52 @@ class UserCreation extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  // componentWillMount(){
+  // }
+
+  componentDidUpdate() {
+    console.log(this.state);
+  }
 
   handleSubmit(event) {
     event.preventDefault()
     this.props.updateComplete();
-    var newState = this.state;
+    const newState = this.state;
     newState.userComplete = true;
-    axios.put('/api/user/', newState).then(data =>{
-      if (data.data){
-        window.location="/"
+    axios.put('/api/user/', newState).then(data => {
+      if (data.data) {
+        window.location = '/';
       } else {
-        alert("There was an error, please check your inputs")
+        alert('There was an error, please check your inputs');
       }
     })
-  }
-  componentWillMount(){
-    
-  }
-  
-  componentDidUpdate(){
-    console.log(this.state)
   }
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>
+          <label htmlFor="user-creation">
             Phone #:
             <input type="tel" placeholder="(888)888-8888" onChange={e => this.setState({ phoneNumber: e.target.value })} />
-            <br/>
+            <br />
             Gender:
-            <select value = {this.state.gender} onChange={e => this.setState({ gender: e.target.value })}>
+            <select value={this.state.gender} onChange={e => this.setState({ gender: e.target.value })}>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
-            <br/>
+            <br />
             Race:
-            <select value = {this.state.race} onChange={e => this.setState({ race: e.target.value })}>
+            <select value={this.state.race} onChange={e => this.setState({ race: e.target.value })}>
               <option value="white">White</option>
               <option value="black">Black</option>
               <option value="asian">Asian</option>
               <option value="pacificIslander">Pacific Islander</option>
               <option value="latino">Hispanic/Latino</option>
             </select>
-            <br/>
+            <br />
             Height:
-            <input type="text" placeholder="5ft 5in" onChange={e => this.setState({height: e.target.value})}/>
+            <input type="text" placeholder="5ft 5in" onChange={e => this.setState({ height: e.target.value })} />
           </label>
           <input type="submit" value="Submit" />
         </form>
@@ -67,5 +67,9 @@ class UserCreation extends React.Component {
     );
   }
 }
+
+UserCreation.propTypes = {
+  updateComplete: PropTypes.func.isRequired,
+};
 
 export default UserCreation;
