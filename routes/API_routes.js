@@ -19,26 +19,26 @@ module.exports = app => {
       // console.log('foundUser', foundUser);
       // if (!foundUser) foundUser = {};
       res.json(foundUser)
-    })
-  })
-  
+    });
+  });
+
   // route for server to respond if user is logged in
   app.get('/api/loggedin', (req, res) => {
     console.log(`is user logged in? ${isLoggedIn(req, res)}`);
     res.json({
       logged: isLoggedIn(req, res)
-    })
-  })
-  
+    });
+  });
+
   app.post('/api/date', (req, res) => {
     User.findOneAndUpdate({
       _id: req.session.passport.user,
     }, req.body).then((dontMatter, err) => {
-      if (err) res.json(false)
+      if (err) res.json(false);
       else res.json(true);
-    })
-  })
-  
+    });
+  });
+
   app.put('/api/user', (req, res) => {
     // console.log(req.body)
     User.findOneAndUpdate({
@@ -46,6 +46,6 @@ module.exports = app => {
     }, req.body).then((dontMatter, err) => {
       if (err) res.json(false)
       else res.json(true);
-    })
-  })
-}
+    });
+  });
+};

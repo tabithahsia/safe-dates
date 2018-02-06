@@ -15,8 +15,9 @@ class DateCreation extends React.Component {
       m: moment(),
       location: '',
       locationNumber: '',
-      loading: false,
-      numberFound: true
+      // loading: false,
+      numberFound: true,
+      momentSaved: false,
     }
     this.locationChange = this.locationChange.bind(this);
     this.locationSelect = this.locationSelect.bind(this);
@@ -28,12 +29,12 @@ class DateCreation extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state)
+    console.log({ ...this.state, m: this.state.m.format() });
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    axios.post('/api/date/', this.state).then(data =>{
+    axios.post('/api/date/', this.state).then(data => {
       if (data.data) {
         window.location = '/';
         alert('Date alert saved!');
@@ -60,7 +61,7 @@ class DateCreation extends React.Component {
     const service = new google.maps.places.PlacesService(map);
     service.getDetails({ placeId }, (place, status) => {
       // console.log(place)
-      console.log(status);
+      // console.log(status);
       if (place.international_phone_number) {
         that.setState({
           location,
@@ -84,7 +85,7 @@ class DateCreation extends React.Component {
   }
   // TODO
   momentSave() {
-    console.log(this);
+    this.setState({ momentSaved: true })
   }
 
   render() {
@@ -105,7 +106,8 @@ class DateCreation extends React.Component {
       }
     } else {
       opts.readOnly = 'readOnly';
-    } 
+    }
+    const dateTimeStye = this.state.momentSaved ? { backgroundColor: '#98fb98' } : {};
 
     return (
       <div>
@@ -114,6 +116,8 @@ class DateCreation extends React.Component {
             <label htmlFor="date-time">Date and Time
               <input
                 name="date-time"
+                id="date-time"
+                style={dateTimeStye}
                 value={this.state.m.format('llll')}
                 className="form-control"
                 readOnly

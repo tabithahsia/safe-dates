@@ -32,12 +32,12 @@ module.exports = {
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
         loader: 'url-loader?limit=100000'
-      }, 
+      },
       {
         test: /\.css$/,
         include: /node_modules/,
-        loader:  'style-loader!css-loader'
-    } ,
+        loader: 'style-loader!css-loader'
+      },
       { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' }
     ]
   },

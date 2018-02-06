@@ -41932,8 +41932,9 @@ var DateCreation = function (_React$Component) {
       m: (0, _moment2.default)(),
       location: '',
       locationNumber: '',
-      loading: false,
-      numberFound: true
+      // loading: false,
+      numberFound: true,
+      momentSaved: false
     };
     _this.locationChange = _this.locationChange.bind(_this);
     _this.locationSelect = _this.locationSelect.bind(_this);
@@ -41948,7 +41949,7 @@ var DateCreation = function (_React$Component) {
   _createClass(DateCreation, [{
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      console.log(this.state);
+      console.log(_extends({}, this.state, { m: this.state.m.format() }));
     }
   }, {
     key: 'handleSubmit',
@@ -41984,7 +41985,7 @@ var DateCreation = function (_React$Component) {
       var service = new google.maps.places.PlacesService(map);
       service.getDetails({ placeId: placeId }, function (place, status) {
         // console.log(place)
-        console.log(status);
+        // console.log(status);
         if (place.international_phone_number) {
           that.setState({
             location: location,
@@ -42013,7 +42014,7 @@ var DateCreation = function (_React$Component) {
   }, {
     key: 'momentSave',
     value: function momentSave() {
-      console.log(this);
+      this.setState({ momentSaved: true });
     }
   }, {
     key: 'render',
@@ -42036,6 +42037,7 @@ var DateCreation = function (_React$Component) {
       } else {
         opts.readOnly = 'readOnly';
       }
+      var dateTimeStye = this.state.momentSaved ? { backgroundColor: '#98fb98' } : {};
 
       return _react2.default.createElement(
         'div',
@@ -42052,6 +42054,8 @@ var DateCreation = function (_React$Component) {
               'Date and Time',
               _react2.default.createElement('input', {
                 name: 'date-time',
+                id: 'date-time',
+                style: dateTimeStye,
                 value: this.state.m.format('llll'),
                 className: 'form-control',
                 readOnly: true
