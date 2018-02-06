@@ -35,7 +35,7 @@ module.exports = app => {
     User.findOneAndUpdate({
       _id: req.session.passport.user,
     }, {
-      UTCdateTime: req.body.m.slice(0, -5),
+      UTCdateTime: req.body.m.slice(0, -8),
       location: req.body.location,
       locationNumber: req.body.locationNumber
     }).then((dontMatter, err) => {

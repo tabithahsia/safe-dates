@@ -5,7 +5,7 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 import moment from 'moment';
 import InputMoment from 'input-moment'; 
 import 'input-moment/dist/input-moment.css';
-
+import { format, parse } from 'libphonenumber-js';
 
 class DateCreation extends React.Component {
   constructor(props) {
@@ -36,8 +36,12 @@ class DateCreation extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    
-    axios.post('/api/date/', { ...this.state, m: this.state.m.utc() }).then(data => {
+
+    axios.post('/api/date/', {
+      m: this.state.m.utc(),
+      location: this.state.location,
+      locationNumber: format(parse(this.state.locationNumber, 'US'), 'E.164') 
+    }).then(data => {
       if (data.data) {
         window.location = '/';
         alert('Date alert saved!');

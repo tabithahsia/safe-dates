@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     type: String,
   },
   locationNumber: {
-    type: Number
+    type: String
   },
   UTCdateTime: {
     type: String
