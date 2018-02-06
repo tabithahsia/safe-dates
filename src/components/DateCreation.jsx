@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import axios from 'axios';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import moment from 'moment';
 import InputMoment from 'input-moment'; 
 import 'input-moment/dist/input-moment.css';
-import { format, parse } from 'libphonenumber-js';
+import { isValidNumber, format, parse } from 'libphonenumber-js';
 
 class DateCreation extends React.Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class DateCreation extends React.Component {
       // loading: false,
       numberFound: true,
       momentSaved: false,
+      submitHover: false
     }
     this.locationChange = this.locationChange.bind(this);
     this.locationSelect = this.locationSelect.bind(this);
@@ -28,6 +29,7 @@ class DateCreation extends React.Component {
     this.momentSave = this.momentSave.bind(this);
     this.clearInput = this.clearInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.submitHoverHandler = this.submitHoverHandler.bind(this);
   }
 
   componentDidUpdate() {
@@ -49,6 +51,10 @@ class DateCreation extends React.Component {
         alert('There was an error, please check your inputs');
       }
     })
+  }
+
+  submitHoverHandler() {
+    this.setState({ submitHover: !this.state.submitHover });
   }
 
   handleChange(e) {
@@ -115,6 +121,7 @@ class DateCreation extends React.Component {
     } else {
       opts.readOnly = 'readOnly';
     }
+    // styles
     const dateTimeStyle = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
     const locationNumberStyle = _state.numberFound ? {} : { height: 'auto' };
 
@@ -160,14 +167,29 @@ class DateCreation extends React.Component {
                 style={locationNumberStyle}
                 {...opts}
               />
+              {
+                !_state.location && _state.submitHover ?
+                  <Alert bsStyle="warning">
+                    Please enter name of the restaurant/bar/etc ...
+                  </Alert> : null
+              }
+              {
+                !isValidNumber(_state.locationNumber, 'US') && _state.submitHover && _state.locationNumber && _state.locationNumber.length !== 71 ?
+                  <Alert bsStyle="warning">
+                    Please enter a valid phone number
+                  </Alert> : null
+              }
             </label>
+            <Button
+              type="submit"
+              value="Submit"
+              onMouseEnter={this.submitHoverHandler}
+              onMouseLeave={this.submitHoverHandler}
+              style={{ position: 'absolute', bottom: 0 }}
+              disabled={!isValidNumber(_state.locationNumber, 'US')}
+            > Submit
+            </Button>
           </div>
-          <Button
-            type="submit"
-            value="Submit"
-            disabled={_state.locationNumber === '' || _state.locationNumber.length === 71}
-          > Submit
-          </Button>
         </form>
       </div>
     );

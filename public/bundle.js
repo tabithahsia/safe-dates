@@ -41938,7 +41938,8 @@ var DateCreation = function (_React$Component) {
       locationNumber: '',
       // loading: false,
       numberFound: true,
-      momentSaved: false
+      momentSaved: false,
+      submitHover: false
     };
     _this.locationChange = _this.locationChange.bind(_this);
     _this.locationSelect = _this.locationSelect.bind(_this);
@@ -41947,6 +41948,7 @@ var DateCreation = function (_React$Component) {
     _this.momentSave = _this.momentSave.bind(_this);
     _this.clearInput = _this.clearInput.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
+    _this.submitHoverHandler = _this.submitHoverHandler.bind(_this);
     return _this;
   }
 
@@ -41972,6 +41974,11 @@ var DateCreation = function (_React$Component) {
           alert('There was an error, please check your inputs');
         }
       });
+    }
+  }, {
+    key: 'submitHoverHandler',
+    value: function submitHoverHandler() {
+      this.setState({ submitHover: !this.state.submitHover });
     }
   }, {
     key: 'handleChange',
@@ -42047,6 +42054,7 @@ var DateCreation = function (_React$Component) {
       } else {
         opts.readOnly = 'readOnly';
       }
+      // styles
       var dateTimeStyle = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
       var locationNumberStyle = _state.numberFound ? {} : { height: 'auto' };
 
@@ -42105,17 +42113,30 @@ var DateCreation = function (_React$Component) {
                 onFocus: this.clearInput,
                 onChange: this.handleChange,
                 style: locationNumberStyle
-              }, opts))
+              }, opts)),
+              !_state.location && _state.submitHover ? _react2.default.createElement(
+                _reactBootstrap.Alert,
+                { bsStyle: 'warning' },
+                'Please enter name of the restaurant/bar/etc ...'
+              ) : null,
+              !(0, _libphonenumberJs.isValidNumber)(_state.locationNumber, 'US') && _state.submitHover && _state.locationNumber && _state.locationNumber.length !== 71 ? _react2.default.createElement(
+                _reactBootstrap.Alert,
+                { bsStyle: 'warning' },
+                'Please enter a valid phone number'
+              ) : null
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                type: 'submit',
+                value: 'Submit',
+                onMouseEnter: this.submitHoverHandler,
+                onMouseLeave: this.submitHoverHandler,
+                style: { position: 'absolute', bottom: 0 },
+                disabled: !(0, _libphonenumberJs.isValidNumber)(_state.locationNumber, 'US')
+              },
+              ' Submit'
             )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              type: 'submit',
-              value: 'Submit',
-              disabled: _state.locationNumber === '' || _state.locationNumber.length === 71
-            },
-            ' Submit'
           )
         )
       );
