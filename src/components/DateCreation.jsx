@@ -110,7 +110,8 @@ class DateCreation extends React.Component {
     } else {
       opts.readOnly = 'readOnly';
     }
-    const dateTimeStye = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
+    const dateTimeStyle = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
+    const locationNumberStyle = _state.numberFound ? {} : { height: 'auto' };
 
     return (
       <div>
@@ -120,7 +121,7 @@ class DateCreation extends React.Component {
               <input
                 name="date-time"
                 id="date-time"
-                style={dateTimeStye}
+                style={dateTimeStyle}
                 value={_state.m.format('llll')}
                 className="form-control"
                 readOnly
@@ -145,12 +146,13 @@ class DateCreation extends React.Component {
                 name="location"
               />
               <div id="map" />
-              <input
-                name="locationNumber" 
+              <textarea
+                name="locationNumber"
                 value={_state.locationNumber}
                 className="form-control"
                 onFocus={this.clearInput}
                 onChange={this.handleChange}
+                style={locationNumberStyle}
                 {...opts}
               />
             </label>

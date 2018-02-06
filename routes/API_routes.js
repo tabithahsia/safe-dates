@@ -18,7 +18,7 @@ module.exports = app => {
     User.findById(userToFind, (err, foundUser) => {
       // console.log('foundUser', foundUser);
       // if (!foundUser) foundUser = {};
-      res.json(foundUser)
+      res.json(foundUser);
     });
   });
 
@@ -31,9 +31,14 @@ module.exports = app => {
   });
 
   app.post('/api/date', (req, res) => {
+    // console.log(req.body);
     User.findOneAndUpdate({
       _id: req.session.passport.user,
-    }, req.body).then((dontMatter, err) => {
+    }, {
+      dateTime: req.body.m,
+      location: req.body.location,
+      locationNumber: req.body.locationNumber
+    }).then((dontMatter, err) => {
       if (err) res.json(false);
       else res.json(true);
     });

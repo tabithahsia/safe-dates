@@ -42040,7 +42040,8 @@ var DateCreation = function (_React$Component) {
       } else {
         opts.readOnly = 'readOnly';
       }
-      var dateTimeStye = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
+      var dateTimeStyle = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
+      var locationNumberStyle = _state.numberFound ? {} : { height: 'auto' };
 
       return _react2.default.createElement(
         'div',
@@ -42058,7 +42059,7 @@ var DateCreation = function (_React$Component) {
               _react2.default.createElement('input', {
                 name: 'date-time',
                 id: 'date-time',
-                style: dateTimeStye,
+                style: dateTimeStyle,
                 value: _state.m.format('llll'),
                 className: 'form-control',
                 readOnly: true
@@ -42090,12 +42091,13 @@ var DateCreation = function (_React$Component) {
                 name: 'location'
               }),
               _react2.default.createElement('div', { id: 'map' }),
-              _react2.default.createElement('input', _extends({
+              _react2.default.createElement('textarea', _extends({
                 name: 'locationNumber',
                 value: _state.locationNumber,
                 className: 'form-control',
                 onFocus: this.clearInput,
-                onChange: this.handleChange
+                onChange: this.handleChange,
+                style: locationNumberStyle
               }, opts))
             )
           ),
