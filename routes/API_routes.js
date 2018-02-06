@@ -31,11 +31,11 @@ module.exports = app => {
   });
 
   app.post('/api/date', (req, res) => {
-    // console.log(req.body);
+    console.log(req.body);
     User.findOneAndUpdate({
       _id: req.session.passport.user,
     }, {
-      dateTime: req.body.m,
+      UTCdateTime: req.body.m.slice(0, -5),
       location: req.body.location,
       locationNumber: req.body.locationNumber
     }).then((dontMatter, err) => {

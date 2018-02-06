@@ -35,8 +35,9 @@ class DateCreation extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault()
-    axios.post('/api/date/', this.state).then(data => {
+    event.preventDefault();
+    
+    axios.post('/api/date/', { ...this.state, m: this.state.m.utc() }).then(data => {
       if (data.data) {
         window.location = '/';
         alert('Date alert saved!');

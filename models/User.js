@@ -23,7 +23,7 @@ const UserSchema = new Schema({
   locationNumber: {
     type: Number
   },
-  dateTime: {
+  UTCdateTime: {
     type: String
   },
   height: {

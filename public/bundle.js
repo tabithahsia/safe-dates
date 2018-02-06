@@ -41957,7 +41957,8 @@ var DateCreation = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      _axios2.default.post('/api/date/', this.state).then(function (data) {
+
+      _axios2.default.post('/api/date/', _extends({}, this.state, { m: this.state.m.utc() })).then(function (data) {
         if (data.data) {
           window.location = '/';
           alert('Date alert saved!');
