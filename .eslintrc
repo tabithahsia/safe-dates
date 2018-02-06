@@ -33,7 +33,8 @@
       "specialLink": [ "to", "hrefLeft", "hrefRight" ],
       "aspects": [ "noHref", "invalidHref", "preferButton" ]
     }],
-    "react/no-unused-state": [1]
+    "react/no-unused-state": [1],
+    "no-underscore-dangle": [0]
     
   }
 }

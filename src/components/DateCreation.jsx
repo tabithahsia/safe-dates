@@ -1,9 +1,11 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import moment from 'moment';
 import InputMoment from 'input-moment'; 
 import 'input-moment/dist/input-moment.css';
-import moment from 'moment';
+
 
 class DateCreation extends React.Component {
   constructor(props) {
@@ -89,8 +91,9 @@ class DateCreation extends React.Component {
   }
 
   render() {
+    const _state = this.state; 
     const inputProps = {
-      value: this.state.location,
+      value: _state.location,
       onChange: this.locationChange,
       type: 'search',
       placeholder: 'Search restaurants and bars...'
@@ -100,14 +103,14 @@ class DateCreation extends React.Component {
       autocompleteContainer: 'my-autocomplete-container'
     }
     const opts = {};
-    if (!this.state.numberFound) {
-      if (!this.state.locationNumber) {
+    if (!_state.numberFound) {
+      if (!_state.locationNumber) {
         opts.placeholder = 'Google cannot find a phone number for this place; please enter manually';
       }
     } else {
       opts.readOnly = 'readOnly';
     }
-    const dateTimeStye = this.state.momentSaved ? { backgroundColor: '#98fb98' } : {};
+    const dateTimeStye = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
 
     return (
       <div>
@@ -118,14 +121,14 @@ class DateCreation extends React.Component {
                 name="date-time"
                 id="date-time"
                 style={dateTimeStye}
-                value={this.state.m.format('llll')}
+                value={_state.m.format('llll')}
                 className="form-control"
                 readOnly
               />
             </label>
             <div style={{ backgroundColor: 'white' }}> 
               <InputMoment
-                moment={this.state.m}
+                moment={_state.m}
                 onChange={this.momentChange}
                 onSave={this.momentSave}
                 minStep={15} // default
@@ -144,15 +147,20 @@ class DateCreation extends React.Component {
               <div id="map" />
               <input
                 name="locationNumber" 
-                value={this.state.locationNumber}
+                value={_state.locationNumber}
                 className="form-control"
                 onFocus={this.clearInput}
                 onChange={this.handleChange}
-                {...opts} 
+                {...opts}
               />
             </label>
           </div>
-          <input type="submit" value="Submit" />
+          <Button
+            type="submit"
+            value="Submit"
+            disabled={_state.locationNumber === '' || _state.locationNumber.length === 71}
+          > Submit
+          </Button>
         </form>
       </div>
     );
