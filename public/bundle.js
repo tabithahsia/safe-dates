@@ -42057,16 +42057,18 @@ var DateCreation = function (_React$Component) {
       // styles
       var dateTimeStyle = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
       var locationNumberStyle = _state.numberFound ? {} : { height: 'auto' };
+      var flexContainerStyle = { display: 'flex' };
+      var flexItemStyle = { flex: 1 };
 
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           'form',
-          { onSubmit: this.handleSubmit },
+          { onSubmit: this.handleSubmit, style: flexContainerStyle },
           _react2.default.createElement(
             'div',
-            { className: 'form-group col-xs-12 col-sm-6' },
+            { className: 'form-group col-xs-12 col-sm-6', style: flexItemStyle },
             _react2.default.createElement(
               'label',
               { htmlFor: 'date-time' },
@@ -42094,7 +42096,7 @@ var DateCreation = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'form-group col-xs-12 col-sm-6' },
+            { className: 'form-group col-xs-12 col-sm-6', style: flexItemStyle },
             _react2.default.createElement(
               'label',
               { htmlFor: 'address-location' },
@@ -42132,7 +42134,7 @@ var DateCreation = function (_React$Component) {
                 value: 'Submit',
                 onMouseEnter: this.submitHoverHandler,
                 onMouseLeave: this.submitHoverHandler,
-                style: { position: 'absolute', bottom: 0 },
+                style: { position: 'absolute', bottom: 0, right: 0 },
                 disabled: !(0, _libphonenumberJs.isValidNumber)(_state.locationNumber, 'US')
               },
               ' Submit'
