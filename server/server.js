@@ -28,7 +28,7 @@ app.use(cookieSession({
 }));
 
 // passport logic
-require('./config/passport.js')(passport);
+require('../config/passport.js')(passport);
 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
@@ -62,4 +62,3 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-

@@ -1,18 +1,18 @@
-const User = require('../models/User.js');
+const User = require('../../models/User.js');
 
 // helper function to check if user is logged in
 const isLoggedIn = (req, res) => {
   if (req.isAuthenticated()) {
     console.log('----user is logged in----');
     return true;
-  } 
+  }
   console.log('----user is not logged in----');
   return false;
 }
 
 module.exports = app => {
   app.get('/api/user', (req, res) => {
-    let userToFind = '';  
+    let userToFind = '';
     // console.log('req session is', req.session)
     if (req.session.passport) userToFind = req.session.passport.user;
     User.findById(userToFind, (err, foundUser) => {
