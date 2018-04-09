@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Header from './Header';
-import LoginOrStart from './LoginOrStart';
+import Welcome from './Welcome';
 import UserCreation from './UserCreation';
 import DateCreation from './DateCreation';
 
@@ -50,14 +50,16 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="container-fluid" id="big-container" style={{ backgroundColor: 'teal' }}>
-          <Header />
+          <Header
+            userLogged={this.state.userLogged}
+          />
           <Switch>
             {/* Routes */}
             <Route
               exact
               path="/"
               render={() => (
-                <LoginOrStart
+                <Welcome
                   updateLogin={this.updateLogin}
                   updateUser={this.updateUser}
                   userLogged={this.state.userLogged}
