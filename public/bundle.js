@@ -52185,8 +52185,6 @@ var UserCreation = function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
-  // componentWillMount(){
-  // }
 
   _createClass(UserCreation, [{
     key: 'componentDidUpdate',
