@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Header from './Header';
-import LoginOrStart from './LoginOrStart';
+import Welcome from './Welcome';
 import UserCreation from './UserCreation';
 import DateCreation from './DateCreation';
 
@@ -57,7 +57,7 @@ class App extends React.Component {
               exact
               path="/"
               render={() => (
-                <LoginOrStart
+                <Welcome
                   updateLogin={this.updateLogin}
                   updateUser={this.updateUser}
                   userLogged={this.state.userLogged}

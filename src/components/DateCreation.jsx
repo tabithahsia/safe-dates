@@ -123,7 +123,7 @@ class DateCreation extends React.Component {
     }
     // styles
     const dateTimeStyle = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
-    const locationNumberStyle = _state.numberFound ? {} : { height: 'auto' };
+    const locationNumberStyle = _state.numberFound ? {} : { height: 'auto', width: '100%' };
     const flexContainerStyle = { display: 'flex' };
     const flexItemStyle = { flex: 1 };
 
@@ -152,7 +152,7 @@ class DateCreation extends React.Component {
             </div>
           </div>
           <div className="form-group col-xs-12 col-sm-6" style={flexItemStyle}>
-            <label htmlFor="address-location">Address/Name of venue
+            <label htmlFor="address-location" style={{ width: '100%' }}>Address/Name of venue
               <PlacesAutocomplete
                 inputProps={inputProps}
                 classNames={cssClasses}
@@ -187,7 +187,7 @@ class DateCreation extends React.Component {
               value="Submit"
               onMouseEnter={this.submitHoverHandler}
               onMouseLeave={this.submitHoverHandler}
-              style={{ position: 'absolute', bottom: 0, right: 0 }}
+              style={{ position: 'absolute', bottom: 0, right: '15px' }}
               disabled={!isValidNumber(_state.locationNumber, 'US')}
             > Submit
             </Button>
