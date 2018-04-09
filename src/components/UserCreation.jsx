@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import history from '../history/history';
 
 class UserCreation extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class UserCreation extends React.Component {
     newState.userComplete = true;
     axios.put('/api/user/', newState).then(data => {
       if (data.data) {
-        window.location = '/';
+        history.push({ pathname: '/' });
       } else {
         alert('There was an error, please check your inputs');
       }

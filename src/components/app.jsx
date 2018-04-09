@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import Header from './Header';
 import Welcome from './Welcome';
 import UserCreation from './UserCreation';
@@ -48,7 +48,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <Router>
         <div className="container-fluid" id="big-container" style={{ backgroundColor: 'teal' }}>
           <Header
             userLogged={this.state.userLogged}
@@ -87,7 +87,7 @@ class App extends React.Component {
             />
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

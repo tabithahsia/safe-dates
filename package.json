@@ -31,6 +31,7 @@
     "cookie-session": "^2.0.0-beta.3",
     "css-loader": "^0.28.8",
     "express": "^4.16.2",
+    "history": "^4.7.2",
     "input-moment": "^0.4.0",
     "less-loader": "^4.0.5",
     "libphonenumber-js": "^1.0.12",
