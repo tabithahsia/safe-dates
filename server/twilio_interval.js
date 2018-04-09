@@ -1,4 +1,4 @@
-const User = require('./models/User.js');
+const User = require('../models/User.js');
 const twilio = require('twilio');
 const moment = require('moment');
 
@@ -10,7 +10,7 @@ if (process.env.PORT) {
     twilioNumber: process.env.twilioNumber
   }
 } else {
-  config = require('./config/auth.js').twilio;
+  config = require('../config/Auth_js.js').twilio;
 }
 const client = twilio(config.accountSid, config.authToken);
 

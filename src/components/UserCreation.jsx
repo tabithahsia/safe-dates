@@ -14,8 +14,6 @@ class UserCreation extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  // componentWillMount(){
-  // }
 
   componentDidUpdate() {
     console.log(this.state);
