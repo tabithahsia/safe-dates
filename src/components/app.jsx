@@ -1,49 +1,50 @@
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
+import axios from 'axios';
 import Header from './Header';
 import Welcome from './Welcome';
 import UserCreation from './UserCreation';
 import DateCreation from './DateCreation';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      userLogged: false,
       serverResponded: false,
-      username: '',
-      userComplete: false
-    }
+      isAuthenticated: false,
+      userObj: null,
+    };
 
-    this.updateLogin = this.updateLogin.bind(this);
     this.updateUser = this.updateUser.bind(this);
-    this.updateComplete = this.updateComplete.bind(this)
+  }
+
+  componentDidMount() {
+    axios.get('/api/user').then(foundUser => {
+      // console.log('/api/user returns')
+      // console.log('foundUser received', foundUser)
+      if (foundUser.data) {
+        this.setState({
+          userObj: foundUser.data,
+          isAuthenticated: true,
+          serverResponded: true,
+        });
+      } else {
+        this.setState({ serverResponded: true });
+      }
+    });
   }
 
   componentDidUpdate() {
-    console.log(this.state);
+    // console.log('app.jsx state updated', this.state);
   }
 
-  updateComplete() {
-    this.setState({ userComplete: true })
-  }
-
-  updateLogin(logincheck) {
+  updateUser(newUser) {
     this.setState({
-      serverResponded: true,
-      userLogged: logincheck.data.logged,
-    })
-    console.log('updated routesR\'s login states')
-  }
-
-  updateUser(foundUser) {
-    this.setState({
-      username: foundUser.fullName,
-      userComplete: foundUser.userComplete
-    })
-    // console.log('updated routesR\'s user and setting');
-    // console.log('foundUser', foundUser.fullName)
+      userObj: newUser
+    });
+    // console.log('updated app\'s userObj');
+    // console.log('newUser', newUser.fullName)
   }
 
   render() {
@@ -51,7 +52,8 @@ class App extends React.Component {
       <Router>
         <div className="container-fluid" id="big-container" style={{ backgroundColor: 'teal' }}>
           <Header
-            userLogged={this.state.userLogged}
+            isAuthenticated={this.state.isAuthenticated}
+            userObj={this.state.userObj}
           />
           <Switch>
             {/* Routes */}
@@ -60,11 +62,8 @@ class App extends React.Component {
               path="/"
               render={() => (
                 <Welcome
-                  updateLogin={this.updateLogin}
-                  updateUser={this.updateUser}
-                  userLogged={this.state.userLogged}
+                  isAuthenticated={this.state.isAuthenticated}
                   serverResponded={this.state.serverResponded}
-                  userComplete={this.state.userComplete}
                 />
               )}
             />
@@ -74,7 +73,7 @@ class App extends React.Component {
               path="/userCreation"
               render={() => (
                 <UserCreation
-                  updateComplete={this.updateComplete}
+                  updateUser={this.updateUser}
                 />
               )}
             />

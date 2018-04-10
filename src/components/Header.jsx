@@ -11,16 +11,16 @@ const Header = props => (
         <span className="icon-bar" />
       </button>
       <a className="navbar-brand" href="/">Safe Dates</a>
+      {props.userObj ? <h6>props.userObj.fullName</h6> : null}
     </div>
     <div id="navbar" className="navbar-collapse collapse">
       <ul className="nav navbar-nav">
         <li><a href="/">Home</a></li>
-        {props.userLogged ? <li><a href="/logout">Logout</a></li> : null}
+        {props.isAuthenticated ? <li><a href="/logout">Logout</a></li> : null}
         <li className="dropdown">
-          {/* <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Useful Info<span className="caret"></span></a> */}
           <ul className="dropdown-menu">
             <li><a href="/">Home</a></li>
-            {props.userLogged ? <li><a href="/logout">Logout</a></li> : null}
+            {props.isAuthenticated ? <li><a href="/logout">Logout</a></li> : null}
           </ul>
         </li>
       </ul>
@@ -29,7 +29,8 @@ const Header = props => (
 );
 
 Header.propTypes = {
-  userLogged: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  userObj: PropTypes.shape.isRequired
 };
 
 export default Header;
