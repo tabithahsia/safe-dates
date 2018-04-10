@@ -11,7 +11,7 @@ const Header = props => (
         <span className="icon-bar" />
       </button>
       <a className="navbar-brand" href="/">Safe Dates</a>
-      {props.userObj ? <h6>props.userObj.fullName</h6> : null}
+      {props.fullName ? <h6>props.userObj.fullName</h6> : null}
     </div>
     <div id="navbar" className="navbar-collapse collapse">
       <ul className="nav navbar-nav">
@@ -30,7 +30,11 @@ const Header = props => (
 
 Header.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  userObj: PropTypes.shape.isRequired
+  fullName: PropTypes.string,
+};
+
+Header.defaultProps = {
+  fullName: ''
 };
 
 export default Header;

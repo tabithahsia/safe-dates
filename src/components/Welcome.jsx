@@ -18,7 +18,10 @@ class Welcome extends React.Component {
       );
     } else if (this.props.isAuthenticated === true && this.props.serverResponded === true) {
       content = (
-        <AfterLogin appName={appName} />
+        <AfterLogin
+          appName={appName}
+          userComplete={this.props.userObj ? this.props.userObj.userComplete : false }
+        />
       );
     } else {
       content = (<h3>Waiting for server ...</h3>);
@@ -34,6 +37,22 @@ class Welcome extends React.Component {
 Welcome.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   serverResponded: PropTypes.bool.isRequired,
+  userObj: PropTypes.shape({
+    fullName: PropTypes.string,
+    phoneNumber: PropTypes.number,
+    race: PropTypes.string,
+    age: PropTypes.number,
+    location: PropTypes.string,
+    locationNumber: PropTypes.string,
+    UTCdateTime: PropTypes.string,
+    height: PropTypes.string,
+    gender: PropTypes.string,
+    userComplete: PropTypes.bool,
+  })
+};
+
+Welcome.defaultProps = {
+  userObj: null
 };
 
 export default Welcome;

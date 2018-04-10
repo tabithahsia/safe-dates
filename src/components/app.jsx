@@ -5,6 +5,7 @@ import Header from './Header';
 import Welcome from './Welcome';
 import UserCreation from './UserCreation';
 import DateCreation from './DateCreation';
+import history from '../history/history';
 
 class App extends React.Component {
   constructor() {
@@ -49,11 +50,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <div className="container-fluid" id="big-container" style={{ backgroundColor: 'teal' }}>
           <Header
             isAuthenticated={this.state.isAuthenticated}
-            userObj={this.state.userObj}
+            fullName={this.state.userObj ? this.state.userObj.fullName : ''}
           />
           <Switch>
             {/* Routes */}
@@ -64,6 +65,7 @@ class App extends React.Component {
                 <Welcome
                   isAuthenticated={this.state.isAuthenticated}
                   serverResponded={this.state.serverResponded}
+                  userObj={this.state.userObj}
                 />
               )}
             />
