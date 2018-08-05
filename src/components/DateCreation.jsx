@@ -32,9 +32,9 @@ class DateCreation extends React.Component {
     this.submitHoverHandler = this.submitHoverHandler.bind(this);
   }
 
-  componentDidUpdate() {
-    console.log({ ...this.state, m: this.state.m.format() });
-  }
+  // componentDidUpdate() {
+  //   console.log({ ...this.state, m: this.state.m.format() });
+  // }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -66,7 +66,6 @@ class DateCreation extends React.Component {
   }
 
   locationSelect(location, placeId) {
-    const that = this;  
     const map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: -33.866, lng: 151.196 },
       zoom: 15
@@ -76,35 +75,34 @@ class DateCreation extends React.Component {
       // console.log(place)
       // console.log(status);
       if (place.international_phone_number) {
-        that.setState({
+        this.setState({
           location,
           locationNumber: place.international_phone_number
-        })
+        });
       } else {
-        that.setState({
+        this.setState({
           numberFound: false,
           locationNumber: 'Google cannot find a phone number for this place; please enter manually'
-        })
+        });
       }
-    })
+    });
   }
 
   clearInput() {
-    this.setState({ locationNumber: '' })
+    this.setState({ locationNumber: '' });
   }
 
   momentChange(m) {
-    this.setState({ m })
+    this.setState({ m });
   }
   // TODO
   momentSave() {
-    this.setState({ momentSaved: true })
+    this.setState({ momentSaved: true });
   }
 
   render() {
-    const _state = this.state; 
     const inputProps = {
-      value: _state.location,
+      value: this.state.location,
       onChange: this.locationChange,
       type: 'search',
       placeholder: 'Search restaurants and bars...'
@@ -114,16 +112,16 @@ class DateCreation extends React.Component {
       autocompleteContainer: 'my-autocomplete-container'
     }
     const opts = {};
-    if (!_state.numberFound) {
-      if (!_state.locationNumber) {
+    if (!this.state.numberFound) {
+      if (!this.state.locationNumber) {
         opts.placeholder = 'Google cannot find a phone number for this place; please enter manually';
       }
     } else {
       opts.readOnly = 'readOnly';
     }
     // styles
-    const dateTimeStyle = _state.momentSaved ? { backgroundColor: '#98fb98' } : {};
-    const locationNumberStyle = _state.numberFound ? {} : { height: 'auto', width: '100%' };
+    const dateTimeStyle = this.state.momentSaved ? { backgroundColor: '#98fb98' } : {};
+    const locationNumberStyle = this.state.numberFound ? {} : { height: 'auto', width: '100%' };
     const flexContainerStyle = { display: 'flex' };
     const flexItemStyle = { flex: 1 };
 
@@ -136,14 +134,14 @@ class DateCreation extends React.Component {
                 name="date-time"
                 id="date-time"
                 style={dateTimeStyle}
-                value={_state.m.format('llll')}
+                value={this.state.m.format('llll')}
                 className="form-control"
                 readOnly
               />
             </label>
             <div style={{ backgroundColor: 'white' }}>
               <InputMoment
-                moment={_state.m}
+                moment={this.state.m}
                 onChange={this.momentChange}
                 onSave={this.momentSave}
                 minStep={15} // default
@@ -162,7 +160,7 @@ class DateCreation extends React.Component {
               <div id="map" />
               <textarea
                 name="locationNumber"
-                value={_state.locationNumber}
+                value={this.state.locationNumber}
                 className="form-control"
                 onFocus={this.clearInput}
                 onChange={this.handleChange}
@@ -170,13 +168,13 @@ class DateCreation extends React.Component {
                 {...opts}
               />
               {
-                !_state.location && _state.submitHover ?
+                !this.state.location && this.state.submitHover ?
                   <Alert bsStyle="warning">
                     Please enter name of the restaurant/bar/etc ...
                   </Alert> : null
               }
               {
-                !isValidNumber(_state.locationNumber, 'US') && _state.submitHover && _state.locationNumber && _state.locationNumber.length !== 71 ?
+                !isValidNumber(this.state.locationNumber, 'US') && this.state.submitHover && this.state.locationNumber && this.state.locationNumber.length !== 71 ?
                   <Alert bsStyle="warning">
                     Please enter a valid phone number
                   </Alert> : null
@@ -188,7 +186,7 @@ class DateCreation extends React.Component {
               onMouseEnter={this.submitHoverHandler}
               onMouseLeave={this.submitHoverHandler}
               style={{ position: 'absolute', bottom: 0, right: '15px' }}
-              disabled={!isValidNumber(_state.locationNumber, 'US')}
+              disabled={!isValidNumber(this.state.locationNumber, 'US')}
             > Submit
             </Button>
           </div>

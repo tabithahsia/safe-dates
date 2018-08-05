@@ -20,7 +20,7 @@ class Welcome extends React.Component {
       content = (
         <AfterLogin
           appName={appName}
-          userComplete={this.props.userObj ? this.props.userObj.userComplete : false }
+          userComplete={this.props.userObj ? this.props.userObj.userComplete : false}
         />
       );
     } else {
@@ -51,8 +51,6 @@ Welcome.propTypes = {
   })
 };
 
-Welcome.defaultProps = {
-  userObj: null
-};
+Welcome.defaultProps = { userObj: null };
 
 export default Welcome;

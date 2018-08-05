@@ -41,9 +41,7 @@ class App extends React.Component {
   }
 
   updateUser(newUser) {
-    this.setState({
-      userObj: newUser
-    });
+    this.setState({ userObj: newUser });
     // console.log('updated app\'s userObj');
     // console.log('newUser', newUser.fullName)
   }

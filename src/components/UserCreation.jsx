@@ -6,32 +6,31 @@ import history from '../history/history';
 class UserCreation extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       phoneNumber: '',
       race: 'White',
       height: '',
       gender: 'Male'
-    }
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate() {
-    console.log(this.state);
-  }
+  // componentDidUpdate() {
+  //   console.log(this.state);
+  // }
 
   handleSubmit(event) {
-    event.preventDefault()
-    this.props.updateComplete();
-    const newState = this.state;
-    newState.userComplete = true;
+    event.preventDefault();
+    const newState = { ...this.state, userComplete: true };
+    this.props.updateUser(newState);
     axios.put('/api/user/', newState).then(data => {
       if (data.data) {
         history.push({ pathname: '/' });
       } else {
         alert('There was an error, please check your inputs');
       }
-    })
+    });
   }
 
   render() {
@@ -40,16 +39,26 @@ class UserCreation extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="user-creation">
             Phone #:
-            <input type="tel" placeholder="(888)888-8888" onChange={e => this.setState({ phoneNumber: e.target.value })} />
+            <input
+              type="tel"
+              placeholder="(888)888-8888"
+              onChange={e => { this.setState({ phoneNumber: e.target.value }); }}
+            />
             <br />
             Gender:
-            <select value={this.state.gender} onChange={e => this.setState({ gender: e.target.value })}>
+            <select
+              value={this.state.gender}
+              onChange={e => this.setState({ gender: e.target.value })}
+            >
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
             <br />
             Race:
-            <select value={this.state.race} onChange={e => this.setState({ race: e.target.value })}>
+            <select
+              value={this.state.race}
+              onChange={e => this.setState({ race: e.target.value })}
+            >
               <option value="white">White</option>
               <option value="black">Black</option>
               <option value="asian">Asian</option>
@@ -58,7 +67,11 @@ class UserCreation extends React.Component {
             </select>
             <br />
             Height:
-            <input type="text" placeholder="5ft 5in" onChange={e => this.setState({ height: e.target.value })} />
+            <input
+              type="text"
+              placeholder="5ft 5in"
+              onChange={e => this.setState({ height: e.target.value })}
+            />
           </label>
           <input type="submit" value="Submit" />
         </form>
@@ -67,8 +80,6 @@ class UserCreation extends React.Component {
   }
 }
 
-UserCreation.propTypes = {
-  updateComplete: PropTypes.func.isRequired,
-};
+UserCreation.propTypes = { updateUser: PropTypes.func.isRequired };
 
 export default UserCreation;

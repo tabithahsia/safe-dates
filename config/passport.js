@@ -1,17 +1,16 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../models/User.js');
+const configAuth = process.env.PORT ? null : require('./Auth.config');
+
 
 module.exports = passport => {
-  let clientID, clientSecret, callbackURL;
-  if (process.env.MONGODB_URI || process.env.PORT) {
-    clientID = process.env.facebook_CLIENT_ID;
-    clientSecret = process.env.facebook_CLIENT_SECRET;
-    callbackURL = process.env.facebook_CALLBACK_URL;
+  let clientID;
+  let clientSecret;
+  let callbackURL;
+  if (process.env.PORT) {
+    ({ clientID, clientSecret, callbackURL } = process.env);
   } else {
-    const configAuth = require('./Auth_js.js');
-    clientID = configAuth.facebookAuth.clientID;
-    clientSecret = configAuth.facebookAuth.clientSecret;
-    callbackURL = configAuth.facebookAuth.callbackURL;
+    ({ clientID, clientSecret, callbackURL } = configAuth.facebookAuth);
   }
 
   passport.serializeUser((user, done) => {
@@ -40,26 +39,22 @@ module.exports = passport => {
     process.nextTick(() => {
       // console.log('trying to find user')
       // console.log(`profile displayname is ${profile.displayName}`)
-      User.findOne({ 'fullName': profile.displayName }, (err, user) => {
+      User.findOne({ fullName: profile.displayName }, (err, user) => {
         if (user) {
           // console.log('user found!')
           return done(null, user);
-        } else {
-          // console.log('creating a new user');
-          User.create({
-            'fullName': profile.displayName
-          }, (err2, data) => {
-            if (err2) {
-              console.log(err2);
-              return null;
-            } else {
-              // console.log('done creating a new user')
-              // console.log(data);
-              return done(null, data);
-            }
-          });
-          return null;
         }
+        // console.log('creating a new user');
+        User.create({ fullName: profile.displayName, }, (err2, data) => {
+          if (err2) {
+            // console.log(err2);
+            return null;
+          }
+          // console.log('done creating a new user')
+          // console.log(data);
+          return done(null, data);
+        });
+        return null;
       });
     });
   }));

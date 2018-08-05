@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 
-
 // express server
 const app = express();
 const port = process.env.PORT || 7233;
@@ -22,9 +21,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(cookieParser('b3saf3'));
 app.use(cookieSession({
   secret: 'b3saf3',
-  cookie: {
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  }
+  cookie: { maxAge: 24 * 60 * 60 * 1000 /* 24 hours */ }
 }));
 
 // passport logic
@@ -54,11 +51,8 @@ require('./routes/API_routes.js')(app);
 
 // every other route goes to our index page
 app.get('*', (req, res) => {
-  // console.log('showing index page!');
   res.redirect('/');
-})
+});
 
 // Server starting message
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+app.listen(port);

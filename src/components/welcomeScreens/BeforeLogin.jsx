@@ -11,9 +11,7 @@ const BeforeLogin = props => (
   </div>
 );
 
-BeforeLogin.propTypes = {
-  appName: PropTypes.string.isRequired,
-};
+BeforeLogin.propTypes = { appName: PropTypes.string.isRequired };
 
 export default BeforeLogin;
 

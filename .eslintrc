@@ -7,34 +7,42 @@
   },
   "rules": {
     "arrow-parens":[1,"as-needed"],
+    "camelcase": 1,
     "comma-dangle": 0,
     "dot-notation": [2, {"allowKeywords": true}],
     "eol-last": [1],
+    "import/prefer-default-export": 0,
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "components": ["Link"],
+      "specialLink": ["to", "hrefLeft", "hrefRight"],
+      "aspects": ["noHref", "invalidHref", "preferButton"]
+    }]
+  },
     "jsx-quotes": 1,
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": 0,
     "max-len": [0, 80, 4],
     "no-trailing-spaces": [1],
     "no-undef": [1],
     "no-unused-vars": [1],
+    "no-console": 1,
+    "object-curly-newline": ["error", { "multiline": true }],
+    "prefer-destructuring": ["error", {
+      "array": true,
+      "object": true
+    }, {
+      "enforceForRenamedProperties": false
+    }],
+    "quotes": 1,
+    "quote-props": 1,
+    "react/jsx-filename-extension": 0, 
     "react/jsx-indent-props": 1,
     "react/jsx-tag-spacing": ["error", {
       "beforeSelfClosing": "always"
     }],
+    "react/prefer-stateless-function": 1,
     "react/self-closing-comp": 1,
     "semi": [1],
-    "spaced-line-comment": [0, "always"],
-    "quote-props": ["error", "consistent"],
-    "no-else-return": [0, { "allowElseIf": true }],
-    "one-var": 0,
-    "one-var-declaration-per-line": ["error", "initializations"],
-    "global-require": 0,
-    "jsx-a11y/anchor-is-valid": [ "error", {
-      "components": [ "Link" ],
-      "specialLink": [ "to", "hrefLeft", "hrefRight" ],
-      "aspects": [ "noHref", "invalidHref", "preferButton" ]
-    }],
-    "react/no-unused-state": [1],
-    "no-underscore-dangle": [0]
-    
+    "spaced-line-comment": [0, "always"]
   }
 }
+      

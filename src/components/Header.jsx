@@ -33,8 +33,6 @@ Header.propTypes = {
   fullName: PropTypes.string,
 };
 
-Header.defaultProps = {
-  fullName: ''
-};
+Header.defaultProps = { fullName: '' };
 
 export default Header;
