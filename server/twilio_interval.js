@@ -1,9 +1,11 @@
 const User = require('../models/User.js');
 const twilio = require('twilio');
 const moment = require('moment');
-const config = process.env.PORT ? ({ authToken, accountSid, twilioNumber }) => (
-  { authToken, accountSid, twilioNumber }
-)(process.env) : require('../config/Auth.config.js').twilio;
+const config = process.env.PORT ? {
+  authToken: process.env.authToken,
+  accountSid: process.env.accountSid,
+  twilioNumber: process.env.twilioNumber,
+} : require('../config/Auth.config.js').twilio;
 
 const client = twilio(config.accountSid, config.authToken);
 

@@ -32,8 +32,12 @@ app.use(passport.session()); // persistent login sessions
 
 // MongoDB logic
 mongoose.Promise = Promise;
-if (process.env.MONGODB_URI || process.env.NODE_ENV === 'production') mongoose.connect(process.env.MONGODB_URI);
-else mongoose.connect('mongodb://localhost/safeDatesDB');
+const mongooseOptions = {
+  useMongoClient: true,
+  promiseLibrary: global.Promise,
+}
+if (process.env.PORT) mongoose.connect(process.env.MONGODB_URI, mongooseOptions);
+else mongoose.connect('mongodb://localhost/safeDatesDB', mongooseOptions);
 mongoose.connection.on('error', error => console.log('Mongoose Error: ', error));
 mongoose.connection.once('open', () => console.log('Mongoose connection successful.'));
 
