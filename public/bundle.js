@@ -49507,6 +49507,15 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      //handles Facebook redirects hash
+      if (window.location.hash == '#_=_') {
+        window.location.hash = '';
+        history.replaceState('', document.title, window.location.pathname);
+      }
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -49514,8 +49523,7 @@ var App = function (_React$Component) {
       _axios2.default.get('/api/user').then(function (_ref) {
         var data = _ref.data;
 
-        // console.log('/api/user returns 2')
-        // console.log('res', res)
+        // console.log('/api/user returns')
         // console.log('foundUser received', data)
         if (data) {
           _this2.setState({

@@ -5,7 +5,7 @@ import Header from './Header';
 import Welcome from './Welcome';
 import UserCreation from './UserCreation';
 import DateCreation from './DateCreation';
-import history from '../history/history';
+import historyObj from '../history/history';
 
 class App extends React.Component {
   constructor() {
@@ -18,10 +18,17 @@ class App extends React.Component {
     this.updateUser = this.updateUser.bind(this);
   }
 
+  componentWillMount() {
+    //handles Facebook redirects hash
+    if (window.location.hash == '#_=_') {
+      window.location.hash = '';
+      history.replaceState('', document.title, window.location.pathname);
+    }
+  }
+
   componentDidMount() {
     axios.get('/api/user').then(({ data }) => {
-      // console.log('/api/user returns 2')
-      // console.log('res', res)
+      // console.log('/api/user returns')
       // console.log('foundUser received', data)
       if ( data ) {
         this.setState({
@@ -47,7 +54,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router history={history}>
+      <Router history={historyObj}>
         <div className="container-fluid" id="big-container" style={{ backgroundColor: 'teal' }}>
           <Header
             isAuthenticated={this.state.isAuthenticated}
