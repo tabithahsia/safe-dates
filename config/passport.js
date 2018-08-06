@@ -28,14 +28,14 @@ module.exports = passport => {
   });
 
   passport.use(new FacebookStrategy({
-    profileFields: ['id', 'displayName', 'photos'],
+    profileFields: ['displayName', 'photos', 'gender', 'age_range', 'birthday'],
     clientID,
     clientSecret,
     callbackURL,
   }, (accessToken, refreshToken, profile, done) => {
     // console.log("access", accessToken)
     // console.log("refresh", refreshToken)
-    // console.log("profile", profile)
+    console.log("profile", profile)
     process.nextTick(() => {
       // console.log('trying to find user')
       // console.log(`profile displayname is ${profile.displayName}`)
