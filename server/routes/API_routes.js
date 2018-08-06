@@ -16,7 +16,8 @@ module.exports = app => {
     // console.log('req session is', req.session)
     if (req.session.passport) userToFind = req.session.passport.user;
     User.findById(userToFind, (err, foundUser) => {
-      // console.log('foundUser', foundUser);
+      if (err) console.log('error', err)
+      // console.log('mongoose looking for user', foundUser);
       // if (!foundUser) foundUser = {};
       res.json(foundUser);
     });
@@ -34,7 +35,7 @@ module.exports = app => {
       UTCdateTime: req.body.m.slice(0, -8),
       location: req.body.location,
       locationNumber: req.body.locationNumber
-    }).then((data, err) => {
+    }).then((err, data) => {
       if (err) res.json(false);
       else res.json(true);
     });
@@ -43,7 +44,7 @@ module.exports = app => {
   app.put('/api/user', (req, res) => {
     // console.log(req.body)
     User.findOneAndUpdate({ _id: req.session.passport.user }, req.body)
-      .then((data, err) => {
+      .then((err, data) => {
         if (err) res.json(false);
         else res.json(true);
       });

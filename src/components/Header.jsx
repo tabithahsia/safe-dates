@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const LogoutLi = () => <li><a href="/logout">Logout</a></li>;
+
 const Header = props => (
   <nav className="navbar navbar-inverse" id="navbar1">
     <div className="navbar-header">
@@ -11,16 +13,16 @@ const Header = props => (
         <span className="icon-bar" />
       </button>
       <a className="navbar-brand" href="/">Safe Dates</a>
-      {props.fullName ? <h6>props.userObj.fullName</h6> : null}
+      {props.fullName ? <h6>{props.userObj.fullName}</h6> : null}
     </div>
     <div id="navbar" className="navbar-collapse collapse">
       <ul className="nav navbar-nav">
         <li><a href="/">Home</a></li>
-        {props.isAuthenticated ? <li><a href="/logout">Logout</a></li> : null}
+        {props.isAuthenticated ? <LogoutLi /> : null}
         <li className="dropdown">
           <ul className="dropdown-menu">
             <li><a href="/">Home</a></li>
-            {props.isAuthenticated ? <li><a href="/logout">Logout</a></li> : null}
+            {props.isAuthenticated ? <LogoutLi /> : null}
           </ul>
         </li>
       </ul>

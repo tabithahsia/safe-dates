@@ -49502,7 +49502,6 @@ var App = function (_React$Component) {
       isAuthenticated: false,
       userObj: null
     };
-
     _this.updateUser = _this.updateUser.bind(_this);
     return _this;
   }
@@ -49512,29 +49511,32 @@ var App = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('/api/user').then(function (foundUser) {
-        // console.log('/api/user returns')
-        // console.log('foundUser received', foundUser)
-        if (foundUser.data) {
+      _axios2.default.get('/api/user').then(function (_ref) {
+        var data = _ref.data;
+
+        // console.log('/api/user returns 2')
+        // console.log('res', res)
+        // console.log('foundUser received', data)
+        if (data) {
           _this2.setState({
-            userObj: foundUser.data,
             isAuthenticated: true,
-            serverResponded: true
+            serverResponded: true,
+            data: data
           });
         } else {
           _this2.setState({ serverResponded: true });
         }
       });
     }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      // console.log('app.jsx state updated', this.state);
-    }
+
+    // componentDidUpdate() {
+    // console.log('app.js state updated', this.state);
+    // }
+
   }, {
     key: 'updateUser',
-    value: function updateUser(newUser) {
-      this.setState({ userObj: newUser });
+    value: function updateUser(userObj) {
+      this.setState({ userObj: userObj });
       // console.log('updated app\'s userObj');
       // console.log('newUser', newUser.fullName)
     }
@@ -53823,6 +53825,18 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var LogoutLi = function LogoutLi() {
+  return _react2.default.createElement(
+    'li',
+    null,
+    _react2.default.createElement(
+      'a',
+      { href: '/logout' },
+      'Logout'
+    )
+  );
+};
+
 var Header = function Header(props) {
   return _react2.default.createElement(
     'nav',
@@ -53850,7 +53864,7 @@ var Header = function Header(props) {
       props.fullName ? _react2.default.createElement(
         'h6',
         null,
-        'props.userObj.fullName'
+        props.userObj.fullName
       ) : null
     ),
     _react2.default.createElement(
@@ -53868,15 +53882,7 @@ var Header = function Header(props) {
             'Home'
           )
         ),
-        props.isAuthenticated ? _react2.default.createElement(
-          'li',
-          null,
-          _react2.default.createElement(
-            'a',
-            { href: '/logout' },
-            'Logout'
-          )
-        ) : null,
+        props.isAuthenticated ? _react2.default.createElement(LogoutLi, null) : null,
         _react2.default.createElement(
           'li',
           { className: 'dropdown' },
@@ -53892,15 +53898,7 @@ var Header = function Header(props) {
                 'Home'
               )
             ),
-            props.isAuthenticated ? _react2.default.createElement(
-              'li',
-              null,
-              _react2.default.createElement(
-                'a',
-                { href: '/logout' },
-                'Logout'
-              )
-            ) : null
+            props.isAuthenticated ? _react2.default.createElement(LogoutLi, null) : null
           )
         )
       )

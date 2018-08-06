@@ -10,25 +10,24 @@ import history from '../history/history';
 class App extends React.Component {
   constructor() {
     super();
-
     this.state = {
       serverResponded: false,
       isAuthenticated: false,
       userObj: null,
     };
-
     this.updateUser = this.updateUser.bind(this);
   }
 
   componentDidMount() {
-    axios.get('/api/user').then(foundUser => {
-      // console.log('/api/user returns')
-      // console.log('foundUser received', foundUser)
-      if (foundUser.data) {
+    axios.get('/api/user').then(({ data }) => {
+      // console.log('/api/user returns 2')
+      // console.log('res', res)
+      // console.log('foundUser received', data)
+      if ( data ) {
         this.setState({
-          userObj: foundUser.data,
           isAuthenticated: true,
           serverResponded: true,
+          data,
         });
       } else {
         this.setState({ serverResponded: true });
@@ -36,12 +35,12 @@ class App extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    // console.log('app.jsx state updated', this.state);
-  }
+  // componentDidUpdate() {
+    // console.log('app.js state updated', this.state);
+  // }
 
-  updateUser(newUser) {
-    this.setState({ userObj: newUser });
+  updateUser(userObj) {
+    this.setState({ userObj });
     // console.log('updated app\'s userObj');
     // console.log('newUser', newUser.fullName)
   }
